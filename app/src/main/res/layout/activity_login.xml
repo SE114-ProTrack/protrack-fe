@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    android:fillViewport="true"
+    tools:context=".ui.RegisterActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <!-- Back icon -->
+        <ImageButton
+            android:id="@+id/backButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="20dp"
+            android:background="?selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_backward"
+            android:contentDescription="Back"
+            android:scaleType="centerInside" />
+
+        <!-- Title -->
+        <TextView
+            android:id="@+id/txtTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:layout_marginStart="25dp"
+            android:lineSpacingExtra="4dp"
+            android:text="Login to your\nAccount"
+            android:textColor="#244960"
+            android:textSize="40sp"
+            android:textStyle="bold" />
+
+        <!-- Email -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/email_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:hint="Email"
+            app:boxCornerRadiusBottomEnd="16dp"
+            app:boxCornerRadiusBottomStart="16dp"
+            app:boxCornerRadiusTopEnd="16dp"
+            app:boxCornerRadiusTopStart="16dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/emailInput"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:inputType="textEmailAddress"
+                android:drawableStart="@drawable/ic_user"
+                android:drawablePadding="8dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Password -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/password_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="Password"
+            app:boxCornerRadiusBottomEnd="16dp"
+            app:boxCornerRadiusBottomStart="16dp"
+            app:boxCornerRadiusTopEnd="16dp"
+            app:boxCornerRadiusTopStart="16dp"
+            app:endIconMode="password_toggle">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/passwordInput"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:inputType="textPassword"
+                android:drawableStart="@drawable/ic_password"
+                android:drawablePadding="8dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Remember me -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/chkRemember"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Remember me"
+                android:textSize="16sp"
+                android:textFontWeight="400"/>
+        </LinearLayout>
+
+        <!-- Login button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/loginButton"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#244960"
+            android:text="Log in"
+            android:textColor="#fff"
+            app:cornerRadius="16dp" />
+
+
+        <!-- Forgot password -->
+        <TextView
+            android:id="@+id/txtForgotPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:text="Forgot password?"
+            android:textColor="#244960"
+            android:textSize="16sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <!-- Sign up section -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_marginBottom="20dp" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Don't have an account?"
+                android:textColor="#B5B5B5"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/signUpLink"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" Sign up!"
+                android:textColor="#F7E32A"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

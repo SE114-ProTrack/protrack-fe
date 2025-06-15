@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="18dp"
+    android:background="@color/white"
+    tools:context=".ui.AppIntroActivity">
+
+    <!-- Title -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pro"
+            android:textColor="#F7E32A"
+            android:textSize="52sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Track"
+            android:textColor="#244960"
+            android:textSize="52sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:text="A perfect tool to manage your team project!"
+        android:textSize="18sp"
+        android:textAlignment="center"
+        android:alpha="0.6"
+        android:layout_marginTop="10dp"/>
+
+
+    <!-- Log in button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/loginButton"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:layout_marginTop="50dp"
+        android:backgroundTint="#244960"
+        android:text="Login"
+        android:textSize="20sp"
+        android:textColor="#fff"
+        app:cornerRadius="16dp" />
+
+    <!-- Sign up button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/signUpButton"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:layout_marginTop="5dp"
+        android:backgroundTint="#dee4e7"
+        android:text="Sign up"
+        android:textSize="20sp"
+        android:textColor="#000"
+        app:cornerRadius="16dp" />
+
+</LinearLayout>

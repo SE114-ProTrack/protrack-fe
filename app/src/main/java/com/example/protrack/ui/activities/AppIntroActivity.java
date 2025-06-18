@@ -1,4 +1,4 @@
-package com.example.protrack.ui;
+package com.example.protrack.ui.activities;
 
 import android.content.Intent;
 import android.os.Bundle;

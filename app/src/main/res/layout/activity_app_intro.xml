@@ -9,7 +9,7 @@
     android:orientation="vertical"
     android:padding="18dp"
     android:background="@color/white"
-    tools:context=".ui.AppIntroActivity">
+    tools:context=".ui.activities.AppIntroActivity">
 
     <!-- Title -->
     <LinearLayout

@@ -1,4 +1,4 @@
-package com.example.protrack.ui;
+package com.example.protrack.ui.activities;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;

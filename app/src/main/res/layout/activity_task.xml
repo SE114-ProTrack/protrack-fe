@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    android:fillViewport="true">
+    <!--tools:context=".ui.RegisterActivity" them lop o folder "ui" roi moi dat ten lien quan toi no-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+                <!-- Back icon -->
+                <ImageButton
+                    android:id="@+id/backButton"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_gravity="center"
+                    android:background="?selectableItemBackgroundBorderless"
+                    android:src="@drawable/ic_backward"
+                    android:contentDescription="Back"
+                    android:scaleType="centerInside" />
+
+                <!-- Title: Your -->
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Your "
+                    android:layout_gravity="center"
+                    android:textColor="#25678E"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:layout_toEndOf="@id/backButton"
+                    android:layout_marginStart="8dp"
+                    android:layout_centerVertical="true" />
+
+                <!-- Title: ProTask -->
+                <TextView
+                    android:id="@+id/pro"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Pro"
+                    android:layout_gravity="center"
+                    android:textColor="#FFB800"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:layout_toEndOf="@id/title"
+                    android:layout_marginStart="2dp"
+                    android:layout_centerVertical="true" />
+                <TextView
+                    android:id="@+id/Task"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Task"
+                    android:layout_gravity="center"
+                    android:textColor="#25678E"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:layout_toEndOf="@id/pro"
+                    android:layout_marginStart="0dp"
+                    android:layout_centerVertical="true" />
+                <!-- Thêm khoảng cách đẩy nút + sang phải -->
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1" />
+                <!-- Add Task FAB (styled like icon button) -->
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/fab_add_task"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp" android:src="@android:drawable/ic_input_add"
+                    app:backgroundTint="#244960"
+                    app:tint="@android:color/white" />
+            </LinearLayout>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginStart="3dp"
+            android:layout_marginEnd="3dp"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="6dp"
+            app:strokeColor="@android:color/transparent"
+            app:cardBackgroundColor="@android:color/white">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp">
+
+                <!-- Search icon -->
+                <androidx.constraintlayout.utils.widget.ImageFilterButton
+                    android:id="@+id/search_icon"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_search"
+                    android:background="@null"
+                    app:tint="#33658A"
+                    android:contentDescription="Search Icon" />
+
+                <!-- Input -->
+                <EditText
+                    android:id="@+id/search_edit_text"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="@null"
+                    android:hint="Search"
+                    android:textColor="#33658A"
+                    android:textColorHint="#33658A"
+                    android:textSize="14sp"
+                    android:inputType="text" />
+                <!-- Tune icon -->
+                <androidx.constraintlayout.utils.widget.ImageFilterButton
+                    android:id="@+id/tune_icon"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_tune"
+                    android:background="@null"
+                    app:tint="#33658A"
+                    android:contentDescription="Tune Icon" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <ListView
+            android:id="@+id/listview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+
+            android:divider="@android:color/transparent"
+            android:dividerHeight="-6dp"
+            app:cardElevation="4dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+    </LinearLayout>
+</ScrollView>

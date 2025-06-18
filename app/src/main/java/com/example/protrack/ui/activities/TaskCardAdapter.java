@@ -9,6 +9,7 @@ import android.widget.TextView;
 import android.widget.BaseAdapter;
 
 import com.example.protrack.R;
+import com.example.protrack.model.Task;
 
 import java.util.List;
 

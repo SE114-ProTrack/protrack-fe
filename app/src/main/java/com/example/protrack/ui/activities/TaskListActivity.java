@@ -11,6 +11,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.protrack.R;
+import com.example.protrack.model.Task;
 
 import java.util.ArrayList;
 

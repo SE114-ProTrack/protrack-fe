@@ -1,4 +1,4 @@
-package com.example.protrack.ui.activities;
+package com.example.protrack.model;
 
 import java.io.Serializable;
 

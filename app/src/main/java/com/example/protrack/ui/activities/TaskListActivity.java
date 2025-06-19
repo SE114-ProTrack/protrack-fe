@@ -1,18 +1,14 @@
 package com.example.protrack.ui.activities;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ListView;
-
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-
 import com.example.protrack.R;
 import com.example.protrack.model.Task;
-
 import java.util.ArrayList;
 
 public class TaskListActivity extends AppCompatActivity {
@@ -55,9 +51,9 @@ public class TaskListActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        // Tạo danh sách subtask (chưa được sử dụng trong adapter)
-        ArrayList<Task.SubTask> subTaskList = new ArrayList<>();
-        subTaskList.add(new Task.SubTask("Subtask 1"));
-        subTaskList.add(new Task.SubTask("Subtask 2"));
+//        // Tạo danh sách subtask (chưa được sử dụng trong adapter)
+//        ArrayList<Task.SubTask> subTaskList = new ArrayList<>();
+//        subTaskList.add(new Task.SubTask("Subtask 1"));
+//        subTaskList.add(new Task.SubTask("Subtask 2"));
     }
 }

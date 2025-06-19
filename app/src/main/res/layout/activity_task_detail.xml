@@ -1,0 +1,612 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    android:fillViewport="true">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+          android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
+            <ImageButton
+                android:id="@+id/backButton"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center"
+                android:background="?selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_backward"
+                android:contentDescription="Back"
+                android:scaleType="centerInside" />
+
+            <EditText
+                android:id="@+id/searchBar"
+                android:layout_width="237dp"
+                android:layout_height="48dp"
+                android:background="@drawable/bg_rounded_border"
+                android:hint="Tìm kiếm..."
+                android:inputType="text"
+                android:paddingHorizontal="16dp"
+                android:textColor="#244960"
+                android:textColorHint="#999999"
+                android:visibility="invisible" />
+
+            <ImageButton
+                android:id="@+id/searchButton"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center"
+                android:background="?selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_search"
+                app:tint="#244960"                android:contentDescription="Back"
+                android:scaleType="centerInside" />
+
+            <ImageButton
+                android:id="@+id/exploreButton"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center"
+                app:tint="#244960"
+                android:background="?selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_explore"
+                android:contentDescription="Back"
+                android:scaleType="centerInside" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/avatar_title_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="8dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                app:cardBackgroundColor="#FBE18F"
+                app:cardCornerRadius="999dp"
+                app:cardElevation="0dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="10dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/ic_checklist"
+                    app:tint="@color/black"
+                    />
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="Wireframe - ProTrack"
+                android:textColor="#1A1033"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="For mobile project. This is a sample of a long description. You don’t need to care about what this text is about."
+            android:textAlignment="center"
+            android:gravity="center"
+            android:textColor="#26495C"
+            android:textSize="14sp"
+           />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            tools:ignore="MissingConstraints"
+           >
+
+            <!-- 🔘 Assign -->
+
+            <ImageView
+                android:id="@+id/ic_assign"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_assign"
+                app:tint="#244960"
+
+            app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/label_assign"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:text="Assign"
+                android:textColor="#26495C"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/ic_assign"
+                app:layout_constraintTop_toTopOf="@id/ic_assign" />
+
+            <LinearLayout
+                android:id="@+id/avatar_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+      >
+
+                <!-- You can repeat these ImageViews -->
+                <ImageView
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginEnd="-8dp"
+                    android:background="@drawable/bg_avatar_circle"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_user" />
+
+                <ImageView
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginEnd="-8dp"
+                    android:background="@drawable/bg_avatar_circle"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_user" />
+
+                <!-- ... more avatars -->
+            </LinearLayout>
+
+            <!-- 👤 Moderator -->
+            <ImageView
+                android:id="@+id/ic_moderator"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginTop="16dp"
+                app:tint="#244960"
+            android:src="@drawable/ic_person"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ic_assign" />
+
+            <TextView
+                android:id="@+id/label_moderator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:text="Moderator"
+                android:textColor="#26495C"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/ic_moderator"
+                app:layout_constraintTop_toTopOf="@id/ic_moderator" />
+
+            <LinearLayout
+                android:id="@+id/moderator_container"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/ic_moderator">
+                <!--nếu thêm                     android:background="@drawable/avatar_circle"
+                thì nó sẽ bị che đi avatar-->
+                <ImageView
+                    android:id="@+id/moderator_avatar"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginEnd="8dp"
+                    android:clipToOutline="true"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_user" />
+
+                <TextView
+                    android:id="@+id/moderator_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Alice (You)"
+                    android:textColor="#26495C"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+
+            <!--  Status -->
+            <ImageView
+                android:id="@+id/ic_status"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginTop="16dp"
+                app:tint="#244960"
+                android:src="@drawable/ic_checkcircle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ic_moderator" />
+
+            <TextView
+                android:id="@+id/label_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:text="Status"
+
+                android:textColor="#26495C"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/ic_status"
+                app:layout_constraintTop_toTopOf="@id/ic_status" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/status_chip"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:insetLeft="0dp"
+                android:insetTop="0dp"
+                android:insetRight="0dp"
+                android:insetBottom="5dp"
+                android:text="In Progress"
+                android:textColor="#26495C"
+                app:backgroundTint="@android:color/transparent"
+                app:cornerRadius="50dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/ic_status"
+                app:strokeColor="#26495C"
+                app:strokeWidth="2dp" />
+            <!-- 🕒 Due Date -->
+            <ImageView
+                android:id="@+id/ic_due"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginTop="16dp"
+                app:tint="#244960"
+                android:src="@drawable/ic_clockcircle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ic_status" />
+
+            <TextView
+                android:id="@+id/label_due"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:text="Due Date"
+                android:textColor="#26495C"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/ic_due"
+                app:layout_constraintTop_toTopOf="@id/ic_due" />
+
+            <TextView
+                android:id="@+id/due_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="01/07/2025"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/ic_due" />
+
+            <!-- 🏷 Label -->
+            <ImageView
+                android:id="@+id/ic_label"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/ic_flag"
+                app:tint="#244960"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ic_due" />
+
+            <TextView
+                android:id="@+id/label_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:text="Label"
+                android:textColor="#26495C"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/ic_label"
+                app:layout_constraintTop_toTopOf="@id/ic_label" />
+
+            <!-- Tag: Design -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_design"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="170dp"
+                android:layout_marginTop="0dp"
+                app:cardBackgroundColor="#F06307"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="0dp"
+                app:layout_constraintStart_toEndOf="@id/label_label"
+                app:layout_constraintTop_toTopOf="@id/label_label"
+
+                >
+
+                <TextView
+                    android:id="@+id/tag_design"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="4dp"
+                    android:text="Design"
+                    android:textColor="@android:color/white"
+                    android:textSize="10sp" />
+            </androidx.cardview.widget.CardView>
+
+            <!-- Tag: SE332 -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_code"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                app:cardBackgroundColor="#4C99EE"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="0dp"
+                app:layout_constraintStart_toEndOf="@id/card_design"
+                app:layout_constraintTop_toTopOf="@id/card_design">
+
+                <TextView
+                    android:id="@+id/tag_code"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="4dp"
+                    android:text="SE332"
+                    android:textColor="@android:color/white"
+                    android:textSize="10sp" />
+            </androidx.cardview.widget.CardView>
+
+            <!-- 📎 Attachment -->
+            <ImageView
+                android:id="@+id/ic_attach"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/ic_gridview"
+                app:tint="#244960"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ic_label" />
+
+            <TextView
+                android:id="@+id/label_attach"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:text="Attachment"
+                android:textColor="#26495C"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/ic_attach"
+                app:layout_constraintTop_toTopOf="@id/ic_attach" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/attach_file"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:backgroundTint="@android:color/transparent"
+                android:insetLeft="0dp"
+                android:insetTop="0dp"
+                android:insetRight="0dp"
+                android:insetBottom="0dp"
+                android:paddingHorizontal="16dp"
+                android:text="Overview.pdf"
+                android:textColor="#26495C"
+                app:cornerRadius="50dp"
+                app:iconPadding="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/ic_attach"
+                app:strokeColor="#26495C"
+                app:strokeWidth="1dp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_edit"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="Edit"
+            android:textColor="@android:color/white"
+            android:backgroundTint="#26495C"
+            android:insetLeft="0dp"
+            android:insetRight="0dp"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            app:icon="@drawable/ic_pencil"
+            app:iconGravity="textEnd"
+            app:iconTint="@android:color/white"
+            app:iconPadding="8dp"
+            app:cornerRadius="15dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="16dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="37dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="8dp">
+
+            <!-- Left Icon -->
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                app:srcCompat="@drawable/ic_checklist"
+                            app:tint="#F06307"
+                />
+
+            <!-- Center Text -->
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingHorizontal="8dp"
+                android:text="Sub Tasks"
+                android:textColor="#26495C"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <!-- Right Icon -->
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                app:tint="#244960"
+                app:srcCompat="@drawable/ic_chervonright" />
+        </LinearLayout>
+        <ListView
+            android:id="@+id/listviewsubtask"
+            android:layout_width="match_parent"
+            android:layout_height="191dp"
+            android:layout_marginTop="8dp"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="-6dp"
+            app:cardElevation="4dp"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_subtask_expand"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="Expand"
+            android:layout_marginBottom="10dp"
+            android:textColor="#26495C"
+            android:backgroundTint="@android:color/transparent"
+            android:insetLeft="0dp"
+            android:insetTop="0dp"
+            android:insetRight="0dp"
+            android:insetBottom="0dp"
+            app:cornerRadius="24dp"
+            app:strokeColor="#26495C"
+            app:strokeWidth="2dp"
+            app:icon="@drawable/ic_expand"
+            app:iconGravity="textStart"
+            app:iconPadding="8dp"
+            app:iconTint="#26495C" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="8dp"
+            android:gravity="center_vertical">
+
+            <!-- Left Icon (comment_orange_icon) -->
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginEnd="8dp"
+                app:tint="#F06307"
+
+                android:src="@drawable/ic_cmt" />
+
+            <!-- Center Text -->
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Comments"
+                android:textColor="#26495C"
+                android:textStyle="bold"
+                android:textSize="14sp" />
+
+            <!-- Right Icon (chevron) -->
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                app:tint="#244960"
+                android:src="@drawable/ic_chervonright" />
+        </LinearLayout>
+        <ListView
+            android:id="@+id/listviewComment"
+            android:layout_width="match_parent"
+            android:layout_height="191dp"
+            android:layout_marginTop="8dp"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="-6dp"
+            app:cardElevation="4dp"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_cmt_expand"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:backgroundTint="@android:color/transparent"
+            android:insetLeft="0dp"
+            android:insetTop="0dp"
+            android:insetRight="0dp"
+            android:insetBottom="0dp"
+            android:text="Expand"
+            android:textColor="#26495C"
+            app:cornerRadius="24dp"
+            app:icon="@drawable/ic_expand"
+            app:iconGravity="textStart"
+            app:iconPadding="8dp"
+            app:iconTint="#26495C"
+            app:strokeColor="#26495C"
+            app:strokeWidth="2dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="66dp"
+            android:orientation="horizontal"
+            android:padding="8dp"
+            android:gravity="center_vertical"
+            android:background="@android:color/white">
+
+            <!-- Avatar bên trái -->
+            <ImageView
+                android:id="@+id/avatar"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/ic_user"
+            android:scaleType="centerCrop"
+            android:background="@drawable/bg_avatar_circle"
+            android:clipToOutline="true" />
+
+            <!-- Container input bo góc -->
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/bg_comment_input"
+                android:paddingStart="16dp"
+                android:paddingEnd="36dp"
+                android:paddingVertical="10dp">
+
+                <!-- EditText nhập comment -->
+                <EditText
+                    android:id="@+id/comment_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Post a comment..."
+                    android:background="@null"
+                    android:textColor="#26495C"
+                    android:textColorHint="#26495C"
+                    android:textSize="14sp"
+                    android:inputType="text"
+                    android:maxLines="3"
+                    android:minLines="1"
+                    android:paddingEnd="40dp" />
+
+                <!-- Icon gửi comment -->
+                <ImageButton
+                    android:id="@+id/send_icon"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_send"
+                    android:background="@null"
+                    android:contentDescription="Send"
+                    app:tint="#26495C" />
+            </RelativeLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

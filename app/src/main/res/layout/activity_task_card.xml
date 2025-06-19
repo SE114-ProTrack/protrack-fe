@@ -30,7 +30,9 @@
                 android:layout_height="match_parent"
                 android:padding="10dp"
                 android:scaleType="centerInside"
-                android:src="@drawable/ic_checklist" />
+                android:src="@drawable/ic_checklist"
+                app:tint="@color/black"
+                />
         </androidx.cardview.widget.CardView>
 
         <!-- Content -->

@@ -19,14 +19,10 @@ public class Task implements Serializable {
 
     public static class SubTask implements Serializable {
         private String title;
-
         public SubTask(String title) {
             this.title = title;
         }
-
-        public String getTitle() {
-            return title;
-        }
+        public String getTitle() { return title; }
     }
 
 

@@ -1,0 +1,69 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="12dp">
+
+    <!-- Avatar -->
+    <ImageView
+        android:id="@+id/avatar"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_user"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Name -->
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Tien Tom"
+        android:textColor="#26495C"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@id/avatar"
+        app:layout_constraintTop_toTopOf="@id/avatar"
+        app:layout_constraintEnd_toStartOf="@id/more_icon"
+        app:layout_constraintHorizontal_bias="0.0"/>
+
+    <!-- Time -->
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="3 hours ago"
+        android:textColor="#999999"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@id/tv_name"
+        app:layout_constraintTop_toBottomOf="@id/tv_name" />
+
+    <!-- Three-dot menu -->
+    <ImageButton
+        android:id="@+id/more_icon"
+        android:layout_width="24dp"
+        android:layout_height="20dp"
+        app:tint="#244960"
+        android:background="?selectableItemBackgroundBorderless"
+        android:contentDescription="More options"
+        android:src="@drawable/ic_more"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_name" />
+
+    <!-- Comment content -->
+    <TextView
+        android:id="@+id/tv_comment"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Hello everyone, I have updated some tasks. Please take a look and reply to me asap."
+        android:textColor="#26495C"
+        android:textSize="14sp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="@id/avatar"
+        app:layout_constraintTop_toBottomOf="@id/avatar"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:lineSpacingExtra="2dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>

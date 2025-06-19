@@ -13,8 +13,10 @@
     <color name="colorDisabled">#9E9E9E</color>
     <color name="colorDivider">#E0E0E0</color>
 
-    <!-- Custom (optional) -->
+    <!-- Other -->
     <color name="colorSuccess">#4CAF50</color>
     <color name="colorWarning">#FFA000</color>
     <color name="colorInfo">#2196F3</color>
+
+    <color name="colorDefaultNavIcon">#A29EB6</color>
 </resources>

@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fff"
+    android:background="@color/colorSurface"
     android:fillViewport="true"
     tools:context=".ui.activities.RegisterActivity">
 
@@ -35,7 +35,7 @@
             android:layout_marginStart="25dp"
             android:lineSpacingExtra="4dp"
             android:text="Create your\nAccount"
-            android:textColor="#244960"
+            android:textColor="@color/colorPrimary"
             android:textSize="40sp"
             android:textStyle="bold" />
 
@@ -216,7 +216,7 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginTop="20dp"
-            android:backgroundTint="#244960"
+            android:backgroundTint="@color/colorPrimary"
             android:text="Sign up"
             android:textColor="#fff"
             app:cornerRadius="16dp" />
@@ -246,7 +246,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Sign in!"
-                android:textColor="#F7E32A"
+                android:textColor="@color/colorSecondaryVariant"
                 android:textStyle="bold" />
         </LinearLayout>
 

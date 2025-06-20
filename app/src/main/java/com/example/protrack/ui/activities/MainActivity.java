@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         primaryColor = getResources().getColor(R.color.colorPrimary, null);
-        defaultColor = getResources().getColor(R.color.colorDefaultNavIcon, null);
+        defaultColor = getResources().getColor(R.color.colorDefaultIcon, null);
 
         initViews();
         setListeners();

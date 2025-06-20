@@ -1,22 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Brand -->
+    <!-- Brand color -->
     <color name="colorPrimary">#244960</color>
+    <color name="colorPrimaryVariant">#1C1243</color>
+    <color name="colorOnPrimary">#FFFFFF</color>
     <color name="colorSecondary">#F7E32A</color>
     <color name="colorSecondaryVariant">#FAC929</color>
 
     <!-- Surface -->
     <color name="colorSurface">#FFFFFF</color>
+    <color name="colorOnSurface">#000000</color>
+    <color name="colorOnSurfaceVariant">#A29EB6</color>
 
-    <!-- Status -->
-    <color name="colorError">#B00020</color>
+    <!-- Others -->
+    <color name="colorError">#FF0000</color>
     <color name="colorDisabled">#9E9E9E</color>
     <color name="colorDivider">#E0E0E0</color>
+    <color name="colorSuccess">#47C272</color>
+    <color name="colorWarning">#F56416</color>
+    <color name="colorInfo">#7FBFE1</color>
 
-    <!-- Other -->
-    <color name="colorSuccess">#4CAF50</color>
-    <color name="colorWarning">#FFA000</color>
-    <color name="colorInfo">#2196F3</color>
-
-    <color name="colorDefaultNavIcon">#A29EB6</color>
+    <color name="colorDefaultIcon">#A29EB6</color>
 </resources>

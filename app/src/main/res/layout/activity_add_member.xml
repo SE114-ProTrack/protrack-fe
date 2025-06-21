@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorSurface"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingVertical="30dp"
+        android:paddingHorizontal="16dp">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:layout_marginBottom="10dp">
+
+            <ImageButton
+                android:id="@+id/backButton"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="?selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_backward"
+                android:contentDescription="Back"
+                android:scaleType="centerInside"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add Member"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                app:layout_constraintStart_toEndOf="@id/backButton"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" />
+            <ImageButton
+                android:id="@+id/exploreButton"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="?selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_share"
+                android:contentDescription="Share"
+                android:scaleType="centerInside"
+                app:tint="#244960"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint=""
+            app:boxBackgroundMode="outline"
+            app:boxCornerRadiusTopStart="20dp"
+            app:boxCornerRadiusTopEnd="20dp"
+            app:boxCornerRadiusBottomStart="20dp"
+            app:boxCornerRadiusBottomEnd="20dp"
+            app:boxStrokeColor="#26495C"
+            app:boxStrokeWidth="1dp"
+            app:hintEnabled="false">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editTextSearch"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:hint="Search"
+android:background="@drawable/bg_outlined_18"
+                android:inputType="text"
+                android:padding="12dp"
+                android:textColor="#26495C"
+                android:textColorHint="#26495C"
+                android:textSize="16sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/txtSelectedCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Selected (0)"
+            android:layout_marginTop="15dp"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:textColor="@color/colorPrimary"
+            android:padding="8dp" />
+        <ListView
+            android:id="@+id/listview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+    android:divider="@android:color/transparent"
+            android:dividerHeight="-6dp"
+            app:cardElevation="4dp"
+            android:layout_marginTop="7dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+
+
+    </LinearLayout>
+</ScrollView>

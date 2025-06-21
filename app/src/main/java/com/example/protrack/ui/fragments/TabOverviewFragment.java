@@ -1,5 +1,6 @@
 package com.example.protrack.ui.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.protrack.databinding.FragmentTabOverviewBinding;
 import com.example.protrack.model.Project;
+import com.example.protrack.ui.activities.ProjectListActivity;
+import com.example.protrack.ui.activities.TaskListActivity;
 import com.example.protrack.ui.adapters.ProjectCarouselAdapter;
 
 import java.util.ArrayList;
@@ -32,11 +35,21 @@ public class TabOverviewFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        setupRecyclerView();
+        setupProjectCarousel();
         loadMockProjects(); // Có thể thay bằng API sau này
+
+        binding.seeProjectListButton.setOnClickListener(v -> {
+            Intent intent = new Intent(getContext(), ProjectListActivity.class);
+            startActivity(intent);
+        });
+
+        binding.seeTaskListButton.setOnClickListener(v -> {
+            Intent intent = new Intent(requireContext(), TaskListActivity.class);
+            startActivity(intent);
+        });
     }
 
-    private void setupRecyclerView() {
+    private void setupProjectCarousel() {
         adapter = new ProjectCarouselAdapter(new ArrayList<>(), project -> {
             // TODO: Xử lý khi click vào một project
         });

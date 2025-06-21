@@ -6,13 +6,13 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.protrack.databinding.ComponentProjectCarouselItemBinding;
+import com.example.protrack.databinding.ComponentProjectListItemBinding;
 import com.example.protrack.model.Project;
 import com.example.protrack.utils.Utils;
 
 import java.util.List;
 
-public class ProjectCarouselAdapter extends RecyclerView.Adapter<ProjectCarouselAdapter.ProjectViewHolder> {
+public class ProjectListAdapter extends RecyclerView.Adapter<ProjectListAdapter.ProjectViewHolder> {
 
     private List<Project> projectList;
     private final OnProjectClickListener listener;
@@ -21,15 +21,15 @@ public class ProjectCarouselAdapter extends RecyclerView.Adapter<ProjectCarousel
         void onProjectClick(Project project);
     }
 
-    public ProjectCarouselAdapter(List<Project> projectList, OnProjectClickListener listener) {
+    public ProjectListAdapter(List<Project> projectList, OnProjectClickListener listener) {
         this.projectList = projectList;
         this.listener = listener;
     }
 
     class ProjectViewHolder extends RecyclerView.ViewHolder {
-        private final ComponentProjectCarouselItemBinding binding;
+        private final ComponentProjectListItemBinding binding;
 
-        public ProjectViewHolder(@NonNull ComponentProjectCarouselItemBinding binding) {
+        public ProjectViewHolder(@NonNull ComponentProjectListItemBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }
@@ -59,7 +59,7 @@ public class ProjectCarouselAdapter extends RecyclerView.Adapter<ProjectCarousel
     @Override
     public ProjectViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        ComponentProjectCarouselItemBinding binding = ComponentProjectCarouselItemBinding.inflate(inflater, parent, false);
+        ComponentProjectListItemBinding binding = ComponentProjectListItemBinding.inflate(inflater, parent, false);
         return new ProjectViewHolder(binding);
     }
 

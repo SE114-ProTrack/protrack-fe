@@ -44,7 +44,6 @@
                 android:id="@+id/moreMemberCount"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:layout_marginStart="4dp"
                 android:backgroundTint="#FF8A00"
                 android:background="@drawable/bg_avatar_circle"
                 android:gravity="center"

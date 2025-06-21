@@ -1,5 +1,6 @@
 package com.example.protrack.ui.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -30,7 +31,9 @@ public class ProjectListActivity extends AppCompatActivity {
 
     private void setupProjectList() {
         adapter = new ProjectListAdapter(new ArrayList<>(), project -> {
-            // TODO: xử lý khi nhấn vào 1 project (nếu cần)
+            // TODO: xử lý khi nhấn vào 1 project
+            Intent intent = new Intent(ProjectListActivity.this, ProjectDetailActivity.class);
+            startActivity(intent);
         });
 
         binding.projectList.setLayoutManager(new LinearLayoutManager(this));

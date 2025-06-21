@@ -13,7 +13,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="16dp"
-        android:background="@drawable/bg_outlined_18">
+        android:id="@+id/member_container"
+        android:background="@drawable/bg_transparent"
+
+        >
 
         <!-- Avatar -->
         <ImageView
@@ -81,6 +84,7 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:src="@drawable/ic_check"
+            android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" />

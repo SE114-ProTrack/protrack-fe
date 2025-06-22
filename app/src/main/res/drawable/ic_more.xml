@@ -1,4 +1,5 @@
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
+<<<<<<< Updated upstream
     android:width="24dp"
     android:height="24dp"
     android:viewportWidth="24"
@@ -16,6 +17,25 @@
   <path
       android:pathData="M12,10C10.9,10 10,10.9 10,12C10,13.1 10.9,14 12,14C13.1,14 14,13.1 14,12C14,10.9 13.1,10 12,10Z"
       android:strokeWidth="1.5"
+=======
+    android:width="23dp"
+    android:height="23dp"
+    android:viewportWidth="23"
+    android:viewportHeight="23">
+  <path
+      android:pathData="M4.714,9.428C3.677,9.428 2.828,10.276 2.828,11.313C2.828,12.35 3.677,13.199 4.714,13.199C5.751,13.199 6.599,12.35 6.599,11.313C6.599,10.276 5.751,9.428 4.714,9.428Z"
+      android:strokeWidth="1.41414"
+      android:fillColor="#00000000"
+      android:strokeColor="#244960"/>
+  <path
+      android:pathData="M17.913,9.428C16.875,9.428 16.027,10.276 16.027,11.313C16.027,12.35 16.875,13.199 17.913,13.199C18.949,13.199 19.798,12.35 19.798,11.313C19.798,10.276 18.949,9.428 17.913,9.428Z"
+      android:strokeWidth="1.41414"
+      android:fillColor="#00000000"
+      android:strokeColor="#244960"/>
+  <path
+      android:pathData="M11.313,9.428C10.276,9.428 9.428,10.276 9.428,11.313C9.428,12.35 10.276,13.199 11.313,13.199C12.35,13.199 13.199,12.35 13.199,11.313C13.199,10.276 12.35,9.428 11.313,9.428Z"
+      android:strokeWidth="1.41414"
+>>>>>>> Stashed changes
       android:fillColor="#00000000"
       android:strokeColor="#244960"/>
 </vector>

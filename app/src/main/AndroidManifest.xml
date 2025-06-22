@@ -12,6 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ProTrack"
         tools:targetApi="31">
+<<<<<<< Updated upstream
         <activity
             android:name=".ui.activities.ProjectDetailActivity"
             android:exported="false" />
@@ -23,11 +24,20 @@
         <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
         <!-- </intent-filter> -->
         <!-- </activity> -->
+=======
+<!--        <activity-->
+<!--            android:name=".ui.activities.MainActivity"-->
+<!--            android:exported="true">-->
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+<!--        </activity>-->
+
+>>>>>>> Stashed changes
         <activity
-            android:name=".ui.activities.AddMemberActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.activities.MainActivity"
+            android:name=".ui.activities.ChatActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -56,6 +66,16 @@
         <activity
             android:name=".ui.activities.TaskDetailActivity"
             android:exported="false" />
+<<<<<<< Updated upstream
+=======
+        <activity
+            android:name=".ui.activities.AddMemberActivity"
+            android:exported="false" />
+<!--        <activity-->
+<!--            android:name=".ui.activities.ChatActivity"-->
+<!--            android:exported="false" />-->
+
+>>>>>>> Stashed changes
     </application>
 
 </manifest>

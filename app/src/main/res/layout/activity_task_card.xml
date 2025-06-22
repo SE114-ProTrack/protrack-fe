@@ -74,7 +74,7 @@
                         android:textColor="@android:color/white"
                         android:textSize="11sp"
                         android:backgroundTint="#F56416"
-                        android:background="@drawable/bg_contained_18_ripple" />
+                        android:background="@drawable/bg_contained_14" />
 
                     <TextView
                         android:id="@+id/tag_code"
@@ -87,7 +87,7 @@
                         android:textColor="@android:color/white"
                         android:textSize="11sp"
                         android:backgroundTint="#7FBFE1"
-                        android:background="@drawable/bg_contained_18_ripple" />
+                        android:background="@drawable/bg_contained_14" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

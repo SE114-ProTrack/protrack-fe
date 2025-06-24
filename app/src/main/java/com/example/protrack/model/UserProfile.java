@@ -1,6 +1,8 @@
 package com.example.protrack.model;
 
-public class UserProfile {
+import java.io.Serializable;
+
+public class UserProfile implements Serializable {
     private Long id;
     private String hoTen;
     private String email;

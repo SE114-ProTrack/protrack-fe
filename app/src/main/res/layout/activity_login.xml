@@ -13,14 +13,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="24dp">
+        android:paddingVertical="30dp"
+        android:paddingHorizontal="14dp">
 
         <!-- Back icon -->
         <ImageButton
             android:id="@+id/backButton"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:layout_marginTop="20dp"
             android:background="?selectableItemBackgroundBorderless"
             android:src="@drawable/ic_backward"
             android:contentDescription="Back"
@@ -32,10 +32,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
-            android:layout_marginStart="25dp"
+            android:layout_marginStart="35dp"
             android:lineSpacingExtra="4dp"
             android:text="Login to your\nAccount"
-            android:textColor="@color/colorPrimary"
+            android:textColor="?attr/colorPrimary"
             android:textSize="40sp"
             android:textStyle="bold" />
 
@@ -45,6 +45,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
+            android:layout_marginHorizontal="10dp"
             android:hint="Email"
             app:boxCornerRadiusBottomEnd="16dp"
             app:boxCornerRadiusBottomStart="16dp"
@@ -66,6 +67,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:layout_marginHorizontal="10dp"
             android:hint="Password"
             app:boxCornerRadiusBottomEnd="16dp"
             app:boxCornerRadiusBottomStart="16dp"
@@ -99,7 +101,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Remember me"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 android:textFontWeight="400"/>
         </LinearLayout>
 
@@ -109,9 +111,10 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginTop="20dp"
-            android:backgroundTint="#244960"
+            android:layout_marginHorizontal="10dp"
+            android:backgroundTint="?attr/colorPrimary"
             android:text="Log in"
-            android:textColor="#fff"
+            android:textColor="?attr/colorOnPrimary"
             app:cornerRadius="16dp" />
 
 
@@ -123,8 +126,8 @@
             android:layout_gravity="center"
             android:layout_marginTop="16dp"
             android:text="Forgot password?"
-            android:textColor="@color/colorPrimary"
-            android:textSize="16sp" />
+            android:textColor="?attr/colorPrimary"
+            android:textSize="18sp" />
 
         <View
             android:layout_width="match_parent"
@@ -144,15 +147,15 @@
                 android:layout_height="wrap_content"
                 android:text="Don't have an account?"
                 android:textColor="#B5B5B5"
-                android:textSize="14sp" />
+                android:textSize="15sp" />
 
             <TextView
                 android:id="@+id/signUpLink"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=" Sign up!"
-                android:textColor="@color/colorSecondaryVariant"
-                android:textSize="14sp"
+                android:textColor="?attr/colorSecondaryVariant"
+                android:textSize="15sp"
                 android:textStyle="bold" />
         </LinearLayout>
 

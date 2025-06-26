@@ -9,19 +9,17 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:elevation="4dp"
         app:cardElevation="4dp"
-        app:cardBackgroundColor="@color/colorSurface"
         app:cardCornerRadius="0dp"
         app:strokeWidth="0dp">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="39dp"
-        android:paddingVertical="12dp"
+        android:paddingHorizontal="16dp"
+        android:paddingTop="51dp"
+        android:paddingBottom="12dp"
         android:orientation="horizontal"
+        android:background="@color/colorSurface"
         >
         <!-- Back icon -->
         <ImageButton

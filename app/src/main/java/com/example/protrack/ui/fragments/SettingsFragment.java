@@ -18,7 +18,7 @@ import com.example.protrack.R;
 
 import com.example.protrack.databinding.FragmentSettingsBinding;
 import com.example.protrack.ui.activities.ProfileActivity;
-import com.example.protrack.ui.activities.RegisterActivity;
+import com.example.protrack.ui.activities.AppIntroActivity;
 
 public class SettingsFragment extends Fragment {
 
@@ -66,7 +66,9 @@ public class SettingsFragment extends Fragment {
         });
         menuView.findViewById(R.id.logout).setOnClickListener(v -> {
             popupWindow.dismiss();
-            // TODO: Logout
+
+            Intent intent = new Intent(getContext(), AppIntroActivity.class);
+            startActivity(intent);
         });
     }
 

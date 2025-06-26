@@ -32,22 +32,20 @@ public class LoginActivity extends AppCompatActivity {
         binding.loginButton.setOnClickListener(v -> attemptLogin());
 
         // quay về
-        binding.backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
+        binding.backButton.setOnClickListener(v -> {
+            finish();
         });
 
         // Điều hướng đến màn hình đăng ký
-        binding.signUpLink.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
-                startActivity(intent);
-            }
+        binding.signUpLink.setOnClickListener(v -> {
+            Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+            startActivity(intent);
         });
 
+        binding.txtForgotPassword.setOnClickListener(v -> {
+            Intent intent = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
+            startActivity(intent);
+        });
     }
 
     private void attemptLogin() {

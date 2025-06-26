@@ -13,23 +13,35 @@
         android:theme="@style/Theme.ProTrack"
         tools:targetApi="31">
         <activity
+            android:name=".ui.activities.ResetPasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.EmailResetPasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.SmsResetPasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.ForgotPasswordActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.activities.ProjectDetailActivity"
             android:exported="false" />
         <activity
             android:name=".ui.activities.MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="false" />
 
         <activity
             android:name=".ui.activities.ChatActivity"
             android:exported="false" />
         <activity
             android:name=".ui.activities.AppIntroActivity"
-            android:exported="false" />
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".ui.activities.ProfileActivity"
             android:exported="false" />

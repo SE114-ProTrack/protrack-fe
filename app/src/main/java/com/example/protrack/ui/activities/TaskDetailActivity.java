@@ -1,4 +1,5 @@
 package com.example.protrack.ui.activities;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -55,12 +56,12 @@ public class TaskDetailActivity extends AppCompatActivity {
             commentCardAdapter.increaseVisibleItemCount(2); // Hiển thị thêm 2 comment khi nhấn nút
         });
 
-//        // Nút chuyển sang màn hình chỉnh sửa task
-//        btnEditTask = findViewById(R.id.btn_edit);
-//        btnEditTask.setOnClickListener(v -> {
-//            Intent intent = new Intent(TaskDetailActivity.this, EditTaskActivity.class);
-//            startActivity(intent);
-//        });
+        // Nút chuyển sang màn hình chỉnh sửa task
+        btnEditTask = findViewById(R.id.btn_edit);
+        btnEditTask.setOnClickListener(v -> {
+            Intent intent = new Intent(TaskDetailActivity.this, EditTaskActivity.class);
+            startActivity(intent);
+        });
 
         // Xử lý tìm kiếm
         searchButton = findViewById(R.id.searchButton);

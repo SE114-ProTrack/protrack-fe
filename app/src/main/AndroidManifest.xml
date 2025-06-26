@@ -51,7 +51,9 @@
         <activity
             android:name=".ui.activities.AddMemberActivity"
             android:exported="false" />
-
+        <activity
+            android:name=".ui.activities.EditTaskActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

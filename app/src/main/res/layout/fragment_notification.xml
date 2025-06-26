@@ -1,14 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.fragments.NotificationFragment">
-
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
+            <TextView
+                android:id="@+id/NotificationTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Notification"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="57dp"
+                android:textSize="36dp"/>
+
+            <ImageButton
+                android:id="@+id/moreImageButton"
+                android:layout_marginTop="67dp"
+                android:layout_marginLeft="120dp"
+                android:background="@color/colorOnPrimary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:src="@drawable/ic_more" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/timeStateTextView"
+            android:layout_width="114dp"
+            android:layout_height="30dp"
+            android:text="Today"
+            android:layout_marginStart="16dp"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimary"
+            android:gravity="center_vertical"
+            />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/noti_recycleview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="16dp"
+            />
+    </LinearLayout>
 </FrameLayout>

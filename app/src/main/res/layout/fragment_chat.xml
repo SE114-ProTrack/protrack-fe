@@ -3,12 +3,56 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorSurface"
     tools:context=".ui.fragments.ChatFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:orientation="vertical">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+
+        <TextView
+            android:id="@+id/chattextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Chat"
+            android:textColor="@color/colorPrimary"
+            android:layout_weight="1"
+            android:layout_marginTop="57dp"
+            android:layout_marginStart="28dp"
+            android:textSize="36dp"
+            android:textStyle="bold"/>
+        <ImageButton
+            android:layout_marginTop="57dp"
+            android:id="@+id/createButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="31dp"
+            android:contentDescription="Create"
+            android:src="@drawable/ic_white_plus"
+            android:background="@drawable/bg_contained_20_ripple" />
+        </LinearLayout>
+        <include
+            layout="@layout/component_search_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="17dp"
+            android:layout_marginTop="26dp"
+            android:layout_marginStart="17dp"
+            />
+<androidx.recyclerview.widget.RecyclerView
+    android:layout_width="match_parent"
+    android:id="@+id/chatlistRecycleView"
+
+    android:layout_height="match_parent"
+    />
+
+    </LinearLayout>
 </FrameLayout>

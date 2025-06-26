@@ -22,27 +22,29 @@ public class ChatActivity extends AppCompatActivity {
     private List<com.example.protrack.model.Chat> messageList;
     private ChatAdapter adapter;
     private ListView listView;
-    private EditText searchEditText;
+    private EditText typeMessageEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_chat);
+        // Khởi tạo màn hình tin nhắn trống
         messageList = new ArrayList<>();
         adapter = new ChatAdapter(this, messageList);
         listView = findViewById(R.id.listview);
-
-        searchEditText = findViewById(R.id.search_edit_text);
-
+        // Ánh xạ ô nhập tin nhắn từ layout activity_chat
+        typeMessageEditText = findViewById(R.id.type_message_edittext);
+        // Ánh xạ nút gửi tin nhắn từ layout activity_chat
         btnSend = findViewById(R.id.sendButton);
         listView.setAdapter(adapter);
+        // Xử lý sự kiện khi nhấn nút gửi
         btnSend.setOnClickListener(v -> {
-            String text = searchEditText.getText().toString().trim();
+            String text = typeMessageEditText.getText().toString().trim();
             if (!text.isEmpty()) {
                 messageList.add(new Chat(text, true)); // true = gửi
                 adapter.notifyDataSetChanged();
-                searchEditText.setText("");
+                typeMessageEditText.setText("");
                 listView.setSelection(adapter.getCount() - 1);
             }
         });

@@ -1,14 +1,30 @@
 package com.example.protrack.ui.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
 import com.example.protrack.R;
+import com.example.protrack.model.ChatSummary;
+import com.example.protrack.model.Task;
+import com.example.protrack.ui.activities.ChatActivity;
+import com.example.protrack.ui.activities.TaskDetailActivity;
+import com.example.protrack.ui.activities.TaskListActivity;
+import com.example.protrack.ui.adapters.ChatListAdapter;
+
+import org.jetbrains.annotations.Nullable;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,7 +41,9 @@ public class ChatFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
+    private RecyclerView chatlistRecyclerView;
+    private ChatListAdapter chatListAdapter;
+    private List<ChatSummary> chatSummaries;
     public ChatFragment() {
         // Required empty public constructor
     }
@@ -63,4 +81,39 @@ public class ChatFragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_chat, container, false);
     }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        // Khởi tạo RecyclerView và dữ liệu
+        chatlistRecyclerView = view.findViewById(R.id.chatlistRecycleView);
+        chatlistRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        // Tạo dữ liệu giả (dummy data) để hiển thị
+
+        chatSummaries = new ArrayList<>();
+        chatSummaries.add(new ChatSummary(R.drawable.ic_user, "John", "Hey, how are you?", "2m ago", 1));
+        chatSummaries.add(new ChatSummary(R.drawable.ic_user, "Jane", "Let's meet tomorrow!", "10m ago", 0));
+        chatSummaries.add(new ChatSummary(R.drawable.ic_user, "Team Project", "Update: deadline changed", "1h ago", 3));
+//        Ví dụ tạo dữ liệu với ảnh từ URL:
+//                chatSummaries = new ArrayList<>();
+//        chatSummaries.add(new ChatSummary(
+//                "https://example.com/avatar/john.jpg", // URL ảnh
+//                "John",
+//                "Hey, how are you?",
+//                "2m ago",
+//                1));
+
+        // Gán adapter và truyền sự kiện click
+        chatListAdapter = new ChatListAdapter(getContext(), chatSummaries, chatSummary -> {
+            // Xử lý khi click vào 1 item
+            Intent intent = new Intent(getActivity(), ChatActivity.class);
+            intent.putExtra("senderName", chatSummary.getSenderName());
+            startActivity(intent);
+        });
+
+        chatlistRecyclerView.setAdapter(chatListAdapter);
+    }
+
 }

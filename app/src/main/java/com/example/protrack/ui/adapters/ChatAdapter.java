@@ -42,18 +42,21 @@ public class ChatAdapter extends BaseAdapter {
 
     @Override
     public int getItemViewType(int position) {
+
+        // Nếu tin nhắn là gửi đi thì trả về 1, ngược lại là 0
         return messages.get(position).isSent() ? 1 : 0;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         com.example.protrack.model.Chat msg = messages.get(position);
-
+        // Nếu convertView chưa được tái sử dụng, ta inflate layout phù hợp (gửi/nhận)
         if (convertView == null) {
             int layout = msg.isSent() ? R.layout.component_sent_message : R.layout.component_received_message;
             convertView = LayoutInflater.from(context).inflate(layout, parent, false);
         }
 
+        // Gán nội dung tin nhắn vào TextView
         TextView text = convertView.findViewById(R.id.messageText);
         text.setText(msg.getContent());
 

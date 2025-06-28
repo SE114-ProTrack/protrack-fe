@@ -45,7 +45,7 @@
             </LinearLayout>
 
             <ImageButton
-                android:id="@+id/addButton"
+                android:id="@+id/createButton"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:contentDescription="Create"

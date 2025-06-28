@@ -1,8 +1,6 @@
 package com.example.protrack.ui.fragments;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -17,6 +15,7 @@ import android.widget.PopupWindow;
 import com.example.protrack.R;
 
 import com.example.protrack.databinding.FragmentSettingsBinding;
+import com.example.protrack.ui.activities.ChangePasswordActivity;
 import com.example.protrack.ui.activities.ProfileActivity;
 import com.example.protrack.ui.activities.AppIntroActivity;
 
@@ -42,8 +41,9 @@ public class SettingsFragment extends Fragment {
     }
 
     private void setupListeners() {
-        binding.moreButton.setOnClickListener(v -> showSettingsMenu(v));
+        binding.moreButton.setOnClickListener(this::showSettingsMenu);
     }
+
     private void showSettingsMenu(View anchor) {
         View menuView = LayoutInflater.from(getContext()).inflate(R.layout.menu_settings, null);
         PopupWindow popupWindow = new PopupWindow(menuView,
@@ -52,12 +52,18 @@ public class SettingsFragment extends Fragment {
                 true);
 
         popupWindow.setElevation(10);
-        popupWindow.showAsDropDown(anchor, -530,-35);
+        popupWindow.showAsDropDown(anchor, -530, -35);
 
         menuView.findViewById(R.id.edit_profile).setOnClickListener(v -> {
             popupWindow.dismiss();
 
             Intent intent = new Intent(getContext(), ProfileActivity.class);
+            startActivity(intent);
+        });
+        menuView.findViewById(R.id.change_password).setOnClickListener(v -> {
+            popupWindow.dismiss();
+
+            Intent intent = new Intent(getContext(), ChangePasswordActivity.class);
             startActivity(intent);
         });
         menuView.findViewById(R.id.help).setOnClickListener(v -> {

@@ -1,5 +1,6 @@
 package com.example.protrack.ui.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,10 +11,12 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.PopupWindow;
 
 import com.example.protrack.R;
 
 import com.example.protrack.databinding.FragmentHomeBinding;
+import com.example.protrack.ui.activities.EditTaskActivity;
 
 public class HomeFragment extends Fragment {
 
@@ -39,10 +42,36 @@ public class HomeFragment extends Fragment {
 
         showOverview();
 
+        binding.createButton.setOnClickListener(this::showCreateMenu);
         binding.overviewTab.setOnClickListener(v -> showOverview());
         binding.analyticsTab.setOnClickListener(v -> showAnalytics());
 
         replaceFragment(new TabOverviewFragment());
+    }
+
+    private void showCreateMenu(View anchor) {
+        View menuView = LayoutInflater.from(getContext()).inflate(R.layout.menu_home, null);
+        PopupWindow popupWindow = new PopupWindow(menuView,
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                true);
+
+        popupWindow.setElevation(10);
+        popupWindow.showAsDropDown(anchor, -480, 0);
+
+        menuView.findViewById(R.id.create_project).setOnClickListener(v -> {
+            popupWindow.dismiss();
+
+//            Intent intent = new Intent(getContext(), ProfileActivity.class);
+//            startActivity(intent);
+        });
+
+        menuView.findViewById(R.id.create_task).setOnClickListener(v -> {
+            popupWindow.dismiss();
+
+            Intent intent = new Intent(getContext(), EditTaskActivity.class);
+            startActivity(intent);
+        });
     }
 
     private void showOverview() {

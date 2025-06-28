@@ -25,8 +25,17 @@ public class ProjectListActivity extends AppCompatActivity {
         binding = ActivityProjectListBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        setupListeners();
         setupProjectList();
         loadMockProjects(); // Sau này thay bằng API
+    }
+
+    private void setupListeners() {
+        // quay về
+        binding.backButton.setOnClickListener(v -> {
+            finish();
+        });
+
     }
 
     private void setupProjectList() {

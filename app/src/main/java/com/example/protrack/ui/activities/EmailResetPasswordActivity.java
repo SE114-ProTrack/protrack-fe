@@ -23,7 +23,7 @@ public class EmailResetPasswordActivity extends AppCompatActivity {
         });
 
         binding.continueButton.setOnClickListener(v -> {
-            Intent intent = new Intent(EmailResetPasswordActivity.this, ResetPasswordActivity.class);
+            Intent intent = new Intent(EmailResetPasswordActivity.this, OtpActivity.class);
             startActivity(intent);
         });
 

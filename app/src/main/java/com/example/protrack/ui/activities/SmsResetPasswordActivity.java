@@ -23,7 +23,7 @@ public class SmsResetPasswordActivity extends AppCompatActivity {
         });
 
         binding.continueButton.setOnClickListener(v -> {
-            Intent intent = new Intent(SmsResetPasswordActivity.this, ResetPasswordActivity.class);
+            Intent intent = new Intent(SmsResetPasswordActivity.this, OtpActivity.class);
             startActivity(intent);
         });
 

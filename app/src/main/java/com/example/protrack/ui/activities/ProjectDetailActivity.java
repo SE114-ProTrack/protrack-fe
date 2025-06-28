@@ -1,6 +1,11 @@
 package com.example.protrack.ui.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.PopupWindow;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,11 +31,60 @@ public class ProjectDetailActivity extends AppCompatActivity {
         binding = ActivityProjectDetailBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        binding.taskTab.setOnClickListener(v -> showTasks());
-        binding.memberTab.setOnClickListener(v -> showMembers());
-
+        setupListeners();
         showTasks();
         replaceFragment(new TaskListFragment());
+    }
+
+    private void setupListeners() {
+        // quay về
+        binding.backButton.setOnClickListener(v -> {
+            finish();
+        });
+
+        binding.moreButton.setOnClickListener(this::showMoreMenu);
+        binding.taskTab.setOnClickListener(v -> showTasks());
+        binding.memberTab.setOnClickListener(v -> showMembers());
+    }
+
+    private void showMoreMenu(View anchor) {
+        View menuView = LayoutInflater.from(ProjectDetailActivity.this).inflate(R.layout.menu_project_detail, null);
+        PopupWindow popupWindow = new PopupWindow(menuView,
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                true);
+
+        popupWindow.setElevation(10);
+        popupWindow.showAsDropDown(anchor, -520, -10);
+
+        menuView.findViewById(R.id.create_task).setOnClickListener(v -> {
+            popupWindow.dismiss();
+
+            Intent intent = new Intent(ProjectDetailActivity.this, EditTaskActivity.class);
+            startActivity(intent);
+        });
+
+        menuView.findViewById(R.id.add_member).setOnClickListener(v -> {
+            popupWindow.dismiss();
+
+            Intent intent = new Intent(ProjectDetailActivity.this, AddMemberActivity.class);
+            startActivity(intent);
+        });
+
+        menuView.findViewById(R.id.edit_project).setOnClickListener(v -> {
+            popupWindow.dismiss();
+
+//            Intent intent = new Intent(ProjectDetailActivity.this, EditProjectActivity.class);
+//            startActivity(intent);
+        });
+
+        menuView.findViewById(R.id.delete_project).setOnClickListener(v -> {
+            popupWindow.dismiss();
+
+            // logic delete project
+
+            finish();
+        });
     }
 
     private void showTasks() {

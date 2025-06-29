@@ -67,7 +67,7 @@ public class ProjectDetailActivity extends AppCompatActivity {
         menuView.findViewById(R.id.add_member).setOnClickListener(v -> {
             popupWindow.dismiss();
 
-            Intent intent = new Intent(ProjectDetailActivity.this, AddMemberActivity.class);
+            Intent intent = new Intent(ProjectDetailActivity.this, AddProjectMemberActivity.class);
             startActivity(intent);
         });
 

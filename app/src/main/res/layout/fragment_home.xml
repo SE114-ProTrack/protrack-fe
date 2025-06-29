@@ -55,7 +55,7 @@
 
         <include
             android:id="@+id/searchBar"
-            layout="@layout/component_search_bar"
+            layout="@layout/component_search_bar_with_filter"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="5dp"

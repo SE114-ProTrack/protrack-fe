@@ -1,10 +1,13 @@
 package com.example.protrack.ui.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.protrack.R;
 import com.example.protrack.databinding.ActivityResetPasswordBinding;
+import com.example.protrack.utils.Utils;
 
 public class ResetPasswordActivity extends AppCompatActivity {
 
@@ -21,5 +24,19 @@ public class ResetPasswordActivity extends AppCompatActivity {
             finish();
         });
 
+        binding.continueButton.setOnClickListener(v -> {
+            Utils.showDialog(
+                    this,
+                    "Reset Password\nSuccessfully!",
+                    "Login to start your journey",
+                    "Login",
+                    R.drawable.ic_check_circle,
+                    view -> {
+                        // xử lý sau khi nhấn OK
+                        startActivity(new Intent(this, AppIntroActivity.class));
+                        finish();
+                    }
+            );
+        });
     }
 }

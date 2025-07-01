@@ -224,7 +224,7 @@
                 android:layout_height="24dp"
                 android:layout_marginTop="16dp"
                 app:tint="#244960"
-                android:src="@drawable/ic_checkcircle"
+                android:src="@drawable/ic_check_done"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/ic_moderator" />
 

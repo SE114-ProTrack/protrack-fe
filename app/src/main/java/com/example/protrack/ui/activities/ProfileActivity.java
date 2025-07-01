@@ -1,14 +1,19 @@
 package com.example.protrack.ui.activities;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Toast;
+import android.view.ViewGroup;
+import android.widget.PopupWindow;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.protrack.R;
 import com.example.protrack.databinding.ActivityProfileBinding;
 import com.example.protrack.model.UserProfile;
+import com.example.protrack.utils.Utils;
 
 import java.util.Calendar;
 
@@ -68,11 +73,14 @@ public class ProfileActivity extends AppCompatActivity {
             datePickerDialog.show();
         });
 
+        // chọn giới tính
+        binding.genderInput.setOnClickListener(this::showGenderMenu);
+
         // lưu thông tin
         binding.saveButton.setOnClickListener(v -> {
             String name = binding.fullNameInput.getText().toString().trim();
             String dob = binding.dateOfBirthInput.getText().toString().trim();
-            String gender = "nam";
+            String gender = binding.genderInput.getText().toString().trim();
             String phone = binding.phoneNumberInput.getText().toString().trim();
             String address = binding.addressInput.getText().toString().trim();
 
@@ -104,7 +112,39 @@ public class ProfileActivity extends AppCompatActivity {
 
             }
 
-            finish();
+            Utils.showDialog(
+                    this,
+                    "Register\nSuccessfully!",
+                    "Your account is ready to use!",
+                    "Start",
+                    R.drawable.ic_check_circle,
+                    view -> {
+                        // xử lý sau khi nhấn OK
+                        startActivity(new Intent(this, AppIntroActivity.class));
+                        finish();
+                    }
+            );
+        });
+    }
+
+    private void showGenderMenu(View anchor) {
+        View menuView = LayoutInflater.from(ProfileActivity.this).inflate(R.layout.menu_select_gender, null);
+        PopupWindow popupWindow = new PopupWindow(menuView,
+                anchor.getWidth(),
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                true);
+
+        popupWindow.setElevation(10);
+        popupWindow.showAsDropDown(anchor, 0, 0);
+
+        menuView.findViewById(R.id.male).setOnClickListener(v -> {
+            popupWindow.dismiss();
+            binding.genderInput.setText("Male");
+        });
+
+        menuView.findViewById(R.id.female).setOnClickListener(v -> {
+            popupWindow.dismiss();
+            binding.genderInput.setText("Female");
         });
     }
 }

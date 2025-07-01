@@ -55,7 +55,7 @@
 
     <!-- Comment content -->
     <TextView
-        android:id="@+id/tv_comment"
+        android:id="@+id/comment_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Hello everyone, I have updated some tasks. Please take a look and reply to me asap."

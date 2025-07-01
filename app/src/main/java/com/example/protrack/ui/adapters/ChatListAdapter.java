@@ -1,4 +1,5 @@
 package com.example.protrack.ui.adapters;
+import android.graphics.Typeface;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -46,12 +47,18 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ChatVi
         holder.nameTextView.setText(item.getSenderName());
         holder.messageTextView.setText(item.getLastMessage());
         holder.timeTextView.setText(item.getTimeAgo());
-
+        // Hiển thị badge số tin chưa đọc
         if (item.getUnreadCount() > 0) {
             holder.unreadBadge.setVisibility(View.VISIBLE);
             holder.unreadBadge.setText(String.valueOf(item.getUnreadCount()));
+            //  In đậm nếu còn tin chưa đọc
+            holder.nameTextView.setTypeface(null, Typeface.BOLD);
+            holder.messageTextView.setTypeface(null, Typeface.BOLD);
         } else {
             holder.unreadBadge.setVisibility(View.GONE);
+            //  Bình thường nếu đã đọc
+            holder.nameTextView.setTypeface(null, Typeface.NORMAL);
+            holder.messageTextView.setTypeface(null, Typeface.NORMAL);
         }
 
         // TODO: Load ảnh avatar nếu có (hiện bạn đang dùng drawable cố định)

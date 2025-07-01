@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.protrack.R;
 import com.example.protrack.model.Task;
 import com.example.protrack.model.Comment;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +22,9 @@ public class TaskDetailActivity extends AppCompatActivity {
 
     private Button btnExpand;
     private Button btnEditTask;
+    private EditText commentInput;
+    private ImageButton sendIcon;
+
     private ImageButton searchButton;
     private EditText searchBar;
 
@@ -31,8 +35,8 @@ public class TaskDetailActivity extends AppCompatActivity {
 
         // Khởi tạo danh sách subtask mẫu
         taskList = new ArrayList<>();
-        taskList.add(new Task("Wireframe - ProTrack", "Design", "SE332"));
-        taskList.add(new Task("Create backend API", "Code", "SE333"));
+        taskList.add(new Task("Wireframe - ProTrack", "Design", "SE332", LocalDate.of(2025, 7, 1 )));
+        taskList.add(new Task("Create backend API", "Code", "SE333",LocalDate.of(2020, 10, 1 )));
 
         // Gán adapter cho danh sách subtask
         ListView listViewSubtask = findViewById(R.id.listviewsubtask);
@@ -41,9 +45,9 @@ public class TaskDetailActivity extends AppCompatActivity {
 
         // Khởi tạo danh sách comment mẫu
         commentList = new ArrayList<>();
-        commentList.add(new Comment("Tiến Tôm", "3 hours ago", "Hello everyone, I have updated some tasks. Please take a look and reply to me asap."));
-        commentList.add(new Comment("Mai Lan", "1 hour ago", "Thanks for the update. I'll check it now."));
-        commentList.add(new Comment("Anh Tuấn", "Just now", "Noted. Will get back to you soon."));
+        commentList.add(new Comment("Tiến Tôm", "3 hours ago", "Hello everyone, I have updated some tasks. Please take a look and reply to me asap.", R.drawable.bg_contained_14));
+        commentList.add(new Comment("Mai Lan", "1 hour ago", "Thanks for the update. I'll check it now.", R.drawable.ic_launcher_background));
+        commentList.add(new Comment("Anh Tuấn", "Just now", "Noted. Will get back to you soon.", R.drawable.bg_contained_14));
 
         // Gán adapter cho danh sách comment
         ListView listViewComment = findViewById(R.id.listviewComment);
@@ -81,6 +85,24 @@ public class TaskDetailActivity extends AppCompatActivity {
             finish(); // Quay lại màn trước đó (TaskListActivity)
         });
 
+        // Gửi comment mới
+        commentInput = findViewById(R.id.comment_input);
+        sendIcon = findViewById(R.id.send_icon);
 
+        sendIcon.setOnClickListener(v -> {
+            String content = commentInput.getText().toString().trim();
+            if (!content.isEmpty()) {
+                Comment newComment = new Comment(
+                        "You",              // tên người dùng hiện tại
+                        "Just now",         // thời gian
+                        content,            // nội dung
+                        R.drawable.ic_launcher_background // avatar mặc định
+                );
+                commentList.add(newComment);
+                commentCardAdapter.notifyDataSetChanged();
+                listViewComment.post(() -> listViewComment.setSelection(commentList.size() - 1));
+                commentInput.setText("");
+            }
+        });
     }
 }

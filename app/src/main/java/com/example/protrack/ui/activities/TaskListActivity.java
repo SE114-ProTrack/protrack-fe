@@ -9,6 +9,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import com.example.protrack.R;
 import com.example.protrack.model.Task;
+
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class TaskListActivity extends AppCompatActivity {
@@ -36,8 +38,8 @@ public class TaskListActivity extends AppCompatActivity {
 
         // Tạo danh sách mẫu các task
         taskList = new ArrayList<>();
-        taskList.add(new Task("Wireframe - ProTrack", "Design", "SE332"));
-        taskList.add(new Task("Wireframe - ProTrack", "Design", "SE332"));
+        taskList.add(new Task("Wireframe - ProTrack", "Design", "SE332", LocalDate.of(2025, 7, 1)));
+        taskList.add(new Task("Wireframe - ProTrack", "Design", "SE332",LocalDate.of(2020, 10, 8)));
 
         // Gán adapter để hiển thị task trong ListView
         adapter = new TaskCardAdapter(this, taskList);

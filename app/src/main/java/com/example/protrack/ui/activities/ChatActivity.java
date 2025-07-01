@@ -38,6 +38,8 @@ public class ChatActivity extends AppCompatActivity {
         // Ánh xạ nút gửi tin nhắn từ layout activity_chat
         btnSend = findViewById(R.id.sendButton);
         listView.setAdapter(adapter);
+        // Nút quay về
+        findViewById(R.id.backButton).setOnClickListener(v -> finish());
         // Xử lý sự kiện khi nhấn nút gửi
         btnSend.setOnClickListener(v -> {
             String text = typeMessageEditText.getText().toString().trim();

@@ -6,8 +6,10 @@ public class Comment implements Serializable {
     private String name;
     private String time;
     private String content;
+    private int avatarResId;
 
-    public Comment(String name, String time, String content) {
+
+    public Comment(String name, String time, String content, int avatarResId) {
         this.name = name;
         this.time = time;
         this.content = content;
@@ -23,5 +25,8 @@ public class Comment implements Serializable {
 
     public String getContent() {
         return content;
+    }
+    public int getAvatarResId() {
+        return avatarResId;
     }
 }

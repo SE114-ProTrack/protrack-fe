@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/label_container"
+    android:layout_width="91dp"
+    android:layout_height="24dp"
+    android:layout_marginEnd="8dp"
+    android:background="@null"
+    android:gravity="center"
+
+    android:orientation="horizontal">
+
+    <!-- Nửa trái: chứa tick -->
+    <LinearLayout
+        android:id="@+id/left_half"
+        android:layout_width="29dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_left_half"
+        android:gravity="center">
+
+        <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimary"
+            android:buttonTint="@null" />
+
+
+    </LinearLayout>
+
+
+    <!-- Nửa phải: chứa text -->
+    <LinearLayout
+        android:id="@+id/right_half"
+        android:layout_width="62dp"
+        android:layout_height="match_parent"
+
+        android:background="@drawable/bg_right_half">
+
+
+        <TextView
+            android:id="@+id/label_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Design"
+
+            android:textColor="@android:color/white"
+            android:textSize="13sp" />
+    </LinearLayout>
+
+</LinearLayout>

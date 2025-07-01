@@ -51,7 +51,7 @@ public class CommentCardAdapter extends BaseAdapter {
 
         TextView name = view.findViewById(R.id.tv_name);
         TextView time = view.findViewById(R.id.tv_time);
-        TextView content = view.findViewById(R.id.tv_comment);
+        TextView content = view.findViewById(R.id.comment_text);
         ImageView avatar = view.findViewById(R.id.avatar); // Có thể thay ảnh nếu cần
 
         name.setText(comment.getName());

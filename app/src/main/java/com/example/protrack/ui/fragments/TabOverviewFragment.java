@@ -21,6 +21,7 @@ import com.example.protrack.ui.activities.TaskListActivity;
 import com.example.protrack.ui.adapters.ProjectCarouselAdapter;
 import com.example.protrack.ui.adapters.TaskListAdapter;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -92,8 +93,8 @@ public class TabOverviewFragment extends Fragment {
 
     private void loadMockTasks() {
         List<Task> mockList = new ArrayList<>();
-        mockList.add(new Task("Wireframe - ProTrack", "Design", "SE332"));
-        mockList.add(new Task("Wireframe - ProTrack", "Design", "SE332"));
+        mockList.add(new Task("Wireframe - ProTrack", "Design", "SE332", LocalDate.of(2025, 7, 1)));
+        mockList.add(new Task("Wireframe - ProTrack", "Design", "SE332", LocalDate.of(2020, 7, 1)));
         taskAdapter.setTasks(mockList);
     }
 

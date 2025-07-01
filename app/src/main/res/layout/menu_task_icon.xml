@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="159dp"
+    android:layout_height="119dp"
+    app:cardCornerRadius="14dp"
+    app:strokeWidth="0dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorSurface"
+        android:orientation="vertical"
+        android:paddingVertical="17dp"
+        android:paddingHorizontal="25dp">
+
+        <!-- Tiêu đề -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingBottom="12dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Task Icon"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimary"
+                android:textSize="16sp" />
+
+            <ImageButton
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:background="@drawable/bg_transparent"
+                android:src="@drawable/ic_check"
+                android:contentDescription="Check"
+                android:scaleType="centerInside" />
+        </LinearLayout>
+
+        <!-- Hai icon task -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="8dp"
+            android:weightSum="2">
+
+            <!-- Icon 1 -->
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="8dp">
+
+                <ImageView
+                    android:id="@+id/taskIcon1"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/ic_checklist"
+                    android:background="@drawable/bg_avatar_circle" />
+
+                <ImageView
+                    android:id="@+id/editIcon1"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_gravity="top|end"
+                    android:backgroundTint="@color/colorOnSurfaceVariant"
+                    android:background="@drawable/bg_avatar_circle"
+                    android:padding="2dp"
+                    android:src="@drawable/ic_edit"
+                    android:contentDescription="Edit Icon 1" />
+            </FrameLayout>
+
+            <!-- Icon 2 -->
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="8dp">
+
+                <ImageView
+                    android:id="@+id/taskIcon2"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:scaleType="centerInside"
+                    android:background="@color/colorSecondaryVariant" />
+
+                <ImageView
+                    android:id="@+id/editIcon2"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_gravity="top|end"
+                    android:backgroundTint="@color/colorOnSurfaceVariant"
+                    android:background="@drawable/bg_avatar_circle"
+                    android:padding="2dp"
+                    android:src="@drawable/ic_edit"
+                    android:contentDescription="Edit Icon 2" />
+            </FrameLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

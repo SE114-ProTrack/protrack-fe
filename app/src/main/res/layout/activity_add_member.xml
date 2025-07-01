@@ -13,11 +13,11 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:paddingVertical="30dp"
-        android:paddingHorizontal="16dp">
+       >
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="8dp"
+            android:paddingHorizontal="16dp"
             android:layout_marginBottom="10dp">
 
             <ImageButton
@@ -44,7 +44,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent" />
             <ImageButton
-                android:id="@+id/exploreButton"
+                android:id="@+id/addMemberBtn"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:background="?selectableItemBackgroundBorderless"
@@ -61,6 +61,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint=""
+            android:paddingHorizontal="16dp"
             app:boxBackgroundMode="outline"
             app:boxCornerRadiusTopStart="20dp"
             app:boxCornerRadiusTopEnd="20dp"
@@ -90,17 +91,16 @@ android:background="@drawable/bg_outlined_18"
             android:text="Selected (0)"
             android:layout_marginTop="15dp"
             android:textStyle="bold"
+            android:layout_marginStart="16dp"
             android:textSize="16sp"
             android:textColor="@color/colorPrimary"
             android:padding="8dp" />
-        <ListView
-            android:id="@+id/listview"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/member_recycleview"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
     android:divider="@android:color/transparent"
             android:dividerHeight="12dp"
-            app:cardElevation="4dp"
-            android:layout_marginTop="7dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />

@@ -1,11 +1,15 @@
 package com.example.protrack.ui.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.protrack.R;
 import com.example.protrack.model.Member;
@@ -16,34 +20,51 @@ import java.util.List;
 
 public class AddMemberActivity extends AppCompatActivity {
 
-    private ListView listView;
+    private RecyclerView memberRecycleView;
     private TextView txtSelectedCount;
     private List<Member> members;
     private MemberAdapter adapter;
+    private ImageButton addMemberBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_member);
 
-        listView = findViewById(R.id.listview);
+        memberRecycleView = findViewById(R.id.member_recycleview);
         txtSelectedCount = findViewById(R.id.txtSelectedCount);
-
+        addMemberBtn= findViewById(R.id.addMemberBtn);
         members = new ArrayList<>();
         members.add(new Member("Alice", "Designer", "Online", R.drawable.ic_user, false));
         members.add(new Member("Bob", "Dev", "Offline 2h ago", R.drawable.ic_user, false));
 
         adapter = new MemberAdapter(this, members);
-        listView.setAdapter(adapter);
+        memberRecycleView.setLayoutManager(new LinearLayoutManager(this)); // <== BẮT BUỘC CHO RECYCLER VIEW
+        memberRecycleView.setAdapter(adapter);
 
-        listView.setOnItemClickListener((parent, view, position, id) -> {
+        adapter.setOnItemClickListener(position -> {
             Member m = members.get(position);
             m.setSelected(!m.isSelected());
-            adapter.notifyDataSetChanged();
+            adapter.notifyItemChanged(position);
 
             long count = members.stream().filter(Member::isSelected).count();
             txtSelectedCount.setText("Selected (" + count + ")");
         });
+        addMemberBtn.setOnClickListener(v -> {
+            ArrayList<Member> selectedMembers = new ArrayList<>();
+            for (Member m : members) {
+                if (m.isSelected()) {
+                    selectedMembers.add(m);
+                }
+            }
+
+            Intent resultIntent = new Intent();
+            resultIntent.putParcelableArrayListExtra("selectedMembers", selectedMembers);
+            setResult(RESULT_OK, resultIntent);
+            finish();
+        });
+        // Nút quay về
+        findViewById(R.id.backButton).setOnClickListener(v -> finish());
 
 
     }

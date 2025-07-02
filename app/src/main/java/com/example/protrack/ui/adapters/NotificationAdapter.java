@@ -1,75 +1,64 @@
 package com.example.protrack.ui.adapters;
 
-import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.protrack.R;
+import com.example.protrack.databinding.ComponentNotificationListItemBinding;
 import com.example.protrack.model.Notification;
 
 import java.util.List;
 
-public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapter.ViewHolder> {
+public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapter.NotificationViewHolder> {
 
-    private Context context;
     private List<Notification> notificationList;
 
-    public NotificationAdapter(Context context, List<Notification> notificationList) {
-        this.context = context;
+    public NotificationAdapter(List<Notification> notificationList) {
         this.notificationList = notificationList;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        View notiCard;
-        ImageView imgAvatar;
-        TextView txtName, txtStatus;
-        ImageButton btnDelete;
+    public class NotificationViewHolder extends RecyclerView.ViewHolder {
+        public final ComponentNotificationListItemBinding binding;
 
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
+        public NotificationViewHolder(@NonNull ComponentNotificationListItemBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
+        }
 
-            // Ánh xạ view trong layout
-            notiCard = itemView.findViewById(R.id.noti_card);
-            imgAvatar = itemView.findViewById(R.id.img_user_avatar);
-            txtName = itemView.findViewById(R.id.txt_name);
-            txtStatus = itemView.findViewById(R.id.txt_status_noti);
-            btnDelete = itemView.findViewById(R.id.btn_delete_noti);
+        public void bind(Notification notification) {
 
-            // Gán sự kiện click vào nút delete
-            btnDelete.setOnClickListener(v -> {
-                int position = getAdapterPosition();
-                if (position != RecyclerView.NO_POSITION) {
-                    // Xoá phần tử tại vị trí được bấm
-                    notificationList.remove(position);
-                    notifyItemRemoved(position);
+            binding.name.setText(notification.getUserName());
+            binding.message.setText(notification.getMessage());
+
+            binding.deleteButton.setOnClickListener(v -> {
+                int index = notificationList.indexOf(notification);
+                if (index != -1) {
+                    notificationList.remove(index);
+                    notifyItemRemoved(index);
                 }
             });
         }
     }
 
+    public void setNotifications(List<Notification> notifications) {
+        this.notificationList = notifications;
+        notifyDataSetChanged();
+    }
+
     @NonNull
     @Override
-    public NotificationAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        // Inflate layout cho từng item của RecyclerView
-        View view = LayoutInflater.from(context).inflate(R.layout.component_notification_list_item, parent, false);
-        return new ViewHolder(view);
+    public NotificationViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        ComponentNotificationListItemBinding binding = ComponentNotificationListItemBinding.inflate(inflater, parent, false);
+        return new NotificationAdapter.NotificationViewHolder(binding);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull NotificationAdapter.ViewHolder holder, int position) {
-        // Gán dữ liệu cho item tại vị trí `position`
-        Notification noti = notificationList.get(position);
-        holder.imgAvatar.setImageResource(noti.getUserAvatarResId());
-        holder.txtName.setText(noti.getUserName());
-        holder.txtStatus.setText(noti.getStatusMessage());
+    public void onBindViewHolder(@NonNull NotificationViewHolder holder, int position) {
+        Notification notification = notificationList.get(position);
+        holder.bind(notification);
     }
 
     @Override

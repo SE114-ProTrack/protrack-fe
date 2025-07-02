@@ -120,8 +120,9 @@ public class ProfileActivity extends AppCompatActivity {
                     R.drawable.ic_check_circle,
                     view -> {
                         // xử lý sau khi nhấn OK
-                        startActivity(new Intent(this, AppIntroActivity.class));
-                        finish();
+                        Intent intent = new Intent(this, AppIntroActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
                     }
             );
         });

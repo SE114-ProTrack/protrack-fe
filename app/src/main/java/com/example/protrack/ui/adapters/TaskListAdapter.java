@@ -25,7 +25,7 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.TaskVi
         this.listener = listener;
     }
 
-    class TaskViewHolder extends RecyclerView.ViewHolder {
+    public class TaskViewHolder extends RecyclerView.ViewHolder {
         private final ActivityTaskCardBinding binding;
 
         public TaskViewHolder(@NonNull ActivityTaskCardBinding binding) {

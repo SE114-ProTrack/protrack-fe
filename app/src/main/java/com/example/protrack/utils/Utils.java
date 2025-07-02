@@ -27,6 +27,8 @@ public class Utils {
                     ContextCompat.getDrawable(context, R.drawable.bg_contained_18)
             );
         }
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.setCancelable(false);
 
         ((TextView) dialog.findViewById(R.id.title)).setText(title);
         ((TextView) dialog.findViewById(R.id.message)).setText(message);

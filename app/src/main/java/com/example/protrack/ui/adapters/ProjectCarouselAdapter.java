@@ -26,7 +26,7 @@ public class ProjectCarouselAdapter extends RecyclerView.Adapter<ProjectCarousel
         this.listener = listener;
     }
 
-    class ProjectViewHolder extends RecyclerView.ViewHolder {
+    public class ProjectViewHolder extends RecyclerView.ViewHolder {
         private final ComponentProjectCarouselItemBinding binding;
 
         public ProjectViewHolder(@NonNull ComponentProjectCarouselItemBinding binding) {

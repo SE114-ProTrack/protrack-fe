@@ -25,7 +25,7 @@ public class SearchUserListAdapter extends RecyclerView.Adapter<SearchUserListAd
         this.listener = listener;
     }
 
-    class SearchUserViewHolder extends RecyclerView.ViewHolder {
+    public class SearchUserViewHolder extends RecyclerView.ViewHolder {
         private final ComponentSearchUserListItemBinding binding;
 
         public SearchUserViewHolder(@NonNull ComponentSearchUserListItemBinding binding) {

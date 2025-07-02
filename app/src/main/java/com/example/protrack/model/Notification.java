@@ -1,37 +1,35 @@
 package com.example.protrack.model;
 
+import java.util.UUID;
+
 public class Notification {
-    private int userAvatarResId; // Resource ID cho avatar (hoặc có thể là URL nếu bạn load từ mạng)
+    private String id;
+    private String userAvatarUrl;     // Đường dẫn URL ảnh avatar
     private String userName;
-    private String statusMessage;
+    private String message;
 
-    public Notification(int userAvatarResId, String userName, String statusMessage) {
-        this.userAvatarResId = userAvatarResId;
+    public Notification(String id, String userAvatarUrl, String userName, String message) {
+        this.id = id;
+        this.userAvatarUrl = userAvatarUrl;
         this.userName = userName;
-        this.statusMessage = statusMessage;
+        this.message = message;
     }
 
-    public int getUserAvatarResId() {
-        return userAvatarResId;
-    }
+    // Getter và Setter
 
-    public void setUserAvatarResId(int userAvatarResId) {
-        this.userAvatarResId = userAvatarResId;
-    }
+    public String getId() { return id; }
 
-    public String getUserName() {
-        return userName;
-    }
+    public void setId(String id) { this.id = id; }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
+    public String getUserAvatarUrl() { return userAvatarUrl; }
 
-    public String getStatusMessage() {
-        return statusMessage;
-    }
+    public void setUserAvatarUrl(String userAvatarUrl) { this.userAvatarUrl = userAvatarUrl; }
 
-    public void setStatusMessage(String statusMessage) {
-        this.statusMessage = statusMessage;
-    }
+    public String getUserName() { return userName; }
+
+    public void setUserName(String userName) { this.userName = userName; }
+
+    public String getMessage() { return message; }
+
+    public void setMessage(String message) { this.message = message; }
 }

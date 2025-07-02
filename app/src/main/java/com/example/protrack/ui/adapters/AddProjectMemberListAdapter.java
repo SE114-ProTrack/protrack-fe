@@ -25,7 +25,7 @@ public class AddProjectMemberListAdapter extends RecyclerView.Adapter<AddProject
         this.listener = listener;
     }
 
-    class AddProjectMemberViewHolder extends RecyclerView.ViewHolder {
+    public class AddProjectMemberViewHolder extends RecyclerView.ViewHolder {
         private final ComponentAddProjectMemberListItemBinding binding;
 
         public AddProjectMemberViewHolder(@NonNull ComponentAddProjectMemberListItemBinding binding) {
@@ -44,10 +44,10 @@ public class AddProjectMemberListAdapter extends RecyclerView.Adapter<AddProject
 
     @NonNull
     @Override
-    public AddProjectMemberListAdapter.AddProjectMemberViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public AddProjectMemberViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         ComponentAddProjectMemberListItemBinding binding = ComponentAddProjectMemberListItemBinding.inflate(inflater, parent, false);
-        return new AddProjectMemberListAdapter.AddProjectMemberViewHolder(binding);
+        return new AddProjectMemberViewHolder(binding);
     }
 
     @Override

@@ -26,7 +26,7 @@ public class ProjectListAdapter extends RecyclerView.Adapter<ProjectListAdapter.
         this.listener = listener;
     }
 
-    class ProjectViewHolder extends RecyclerView.ViewHolder {
+    public class ProjectViewHolder extends RecyclerView.ViewHolder {
         private final ComponentProjectListItemBinding binding;
 
         public ProjectViewHolder(@NonNull ComponentProjectListItemBinding binding) {

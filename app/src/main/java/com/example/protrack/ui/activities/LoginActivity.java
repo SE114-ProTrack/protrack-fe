@@ -6,13 +6,13 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.protrack.data.ApiClient;
-import com.example.protrack.data.ApiService;
+import com.example.protrack.data.AuthService;
+import com.example.protrack.data.SharedPrefsManager;
 import com.example.protrack.model.AuthResponse;
 import com.example.protrack.model.LoginRequest;
 import com.example.protrack.databinding.ActivityLoginBinding;
 
 import android.content.SharedPreferences;
-import android.view.View;
 import android.widget.Toast;
 
 import retrofit2.Call;
@@ -49,10 +49,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void attemptLogin() {
-        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
-        /*
         String email = binding.emailInput.getText().toString().trim();
         String password = binding.passwordInput.getText().toString().trim();
 
@@ -71,29 +67,25 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         // Tạo request
-        LoginRequest loginRequest = new LoginRequest(email, password);
+        LoginRequest request = new LoginRequest(email, password);
 
-        ApiService apiService = ApiClient.getInstance().create(ApiService.class);
-        Call<AuthResponse> call = apiService.login(loginRequest);
-        call.enqueue(new Callback<AuthResponse>() {
+        AuthService authService = ApiClient.getInstance().create(AuthService.class);
+
+        authService.login(request).enqueue(new Callback<AuthResponse>() {
             @Override
             public void onResponse(Call<AuthResponse> call, Response<AuthResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     AuthResponse auth = response.body();
 
                     // Lưu token vào SharedPreferences
-                    SharedPreferences prefs = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
-                    prefs.edit()
-                            .putString("jwt_token", auth.getToken())
-                            .putLong("id", auth.getIdNguoiDung())
-                            .putString("fullName", auth.getHoTen())
-                            .putString("email", auth.getEmail())
-                            .apply();
+                    SharedPrefsManager prefs = SharedPrefsManager.getInstance(LoginActivity.this);
 
-                    // Chuyển sang ProjectListActivity
-                    Intent intent = new Intent(LoginActivity.this, ProjectListActivity.class);
+                    prefs.saveToken(auth.getToken());
+
+                    // Chuyển sang MainActivity
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); // Không quay lại Login
                     startActivity(intent);
-                    finish();
                 } else {
                     Toast.makeText(LoginActivity.this, "Đăng nhập thất bại", Toast.LENGTH_SHORT).show();
                 }
@@ -102,8 +94,8 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<AuthResponse> call, Throwable t) {
                 Toast.makeText(LoginActivity.this, "Lỗi kết nối: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+
             }
         });
-        */
     }
 }

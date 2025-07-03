@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.protrack.data.ApiClient;
 import com.example.protrack.data.ApiService;
+import com.example.protrack.data.AuthService;
 import com.example.protrack.model.RegisterRequest;
 import com.example.protrack.model.AuthResponse;
 import com.example.protrack.databinding.ActivityRegisterBinding;
@@ -76,32 +77,29 @@ public class RegisterActivity extends AppCompatActivity {
             binding.confirmPasswordLayout.setError(null);
         }
 
-        Intent intent = new Intent(RegisterActivity.this, ProfileActivity.class);
-        startActivity(intent);
+        binding.signUpButton.setEnabled(false);
 
-//
-//        RegisterRequest request = new RegisterRequest(email, password, fullName, dob, gender, phone, address);
-//
-//        ApiService apiService = ApiClient.getInstance().create(ApiService.class);
-//        binding.signUpButton.setEnabled(false);
-//
-//        apiService.register(request).enqueue(new Callback<AuthResponse>() {
-//            @Override
-//            public void onResponse(Call<AuthResponse> call, Response<AuthResponse> response) {
-//                binding.signUpButton.setEnabled(true);
-//                if (response.isSuccessful()) {
-//                    Toast.makeText(RegisterActivity.this, "Registration successful!", Toast.LENGTH_SHORT).show();
-//                    finish(); // quay lại LoginActivity
-//                } else {
-//                    Toast.makeText(RegisterActivity.this, "Registration failed", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<AuthResponse> call, Throwable t) {
-//                binding.signUpButton.setEnabled(true);
-//                Toast.makeText(RegisterActivity.this, "Error: " + t.getMessage(), Toast.LENGTH_LONG).show();
-//            }
-//        });
+        RegisterRequest request = new RegisterRequest(email, password);
+
+        AuthService authService = ApiClient.getInstance().create(AuthService.class);
+
+        authService.register(request).enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                binding.signUpButton.setEnabled(true);
+                if (response.isSuccessful()) {
+                    Intent intent = new Intent(RegisterActivity.this, ProfileActivity.class);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(RegisterActivity.this, "Registration failed", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                binding.signUpButton.setEnabled(true);
+                Toast.makeText(RegisterActivity.this, "Error: " + t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
     }
 }

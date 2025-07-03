@@ -112,19 +112,19 @@ private TextView txtDayNumber;
         selectedImage.setOnClickListener(v -> openGallery());
         // Nhấn nút tạo project
         saveButton.setOnClickListener(v -> {
-            String projectName = projectNameEditText.getText().toString();
-            String projectDesc = projectDescEditText.getText().toString();
-            String date = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(new Date());
-
-            Long id = System.currentTimeMillis(); // tạo ID tạm thời bằng timestamp
-            Long userId = 1L; // Giả sử người tạo là user ID 1
-
-            Project newProject = new Project(id, projectName, projectDesc, date, userId);
-
-            Intent resultIntent = new Intent();
-            resultIntent.putExtra("newProject", newProject);  // Project implements Serializable
-            setResult(RESULT_OK, resultIntent);
-            finish();
+//            String projectName = projectNameEditText.getText().toString();
+//            String projectDesc = projectDescEditText.getText().toString();
+//            String date = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(new Date());
+//
+//            Long id = System.currentTimeMillis(); // tạo ID tạm thời bằng timestamp
+//            Long userId = 1L; // Giả sử người tạo là user ID 1
+//
+//            Project newProject = new Project(id, projectName, projectDesc, date, userId);
+//
+//            Intent resultIntent = new Intent();
+//            resultIntent.putExtra("newProject", newProject);  // Project implements Serializable
+//            setResult(RESULT_OK, resultIntent);
+//            finish();
         });
 
 

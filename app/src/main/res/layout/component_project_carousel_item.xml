@@ -15,49 +15,21 @@
         android:orientation="vertical"
         android:padding="19dp">
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/projectName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/colorSurface"
-            android:gravity="center_vertical"
-
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/projectName"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Mobile Project"
-                android:textColor="?attr/colorPrimary"
-                android:textSize="17sp"
-                android:textStyle="bold" />
-
-            <FrameLayout
-                android:id="@+id/avatarContainer"
-                android:layout_width="wrap_content"
-                android:layout_height="24dp">
-
-            </FrameLayout>
-
-            <TextView
-                android:id="@+id/moreMemberCount"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:backgroundTint="#FF8A00"
-                android:background="@drawable/bg_avatar_circle"
-                android:gravity="center"
-                android:text="+4"
-                android:textSize="11sp"
-                android:textColor="?attr/colorOnPrimary" />
-        </LinearLayout>
+            android:text="Mobile Project"
+            android:textColor="?attr/colorPrimary"
+            android:textSize="17sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="7dp"
-            android:text="Making a project mana... - Jan 1, 2025"
+            android:text="Making a project management Android..."
             android:textColor="?attr/colorOnSurfaceVariant"
             android:textFontWeight="400"
             android:textSize="11sp" />
@@ -98,7 +70,7 @@
                     android:id="@+id/totalTask"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="/48 tasks"
+                    android:text="/48 task"
                     android:textColor="?attr/colorPrimary"
                     android:textStyle="bold"
                     android:textSize="11sp" />
@@ -106,12 +78,12 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/dayLeft"
+            android:id="@+id/taskLeft"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="7dp"
             android:gravity="center"
-            android:text="10 days left"
+            android:text="0 task left"
             android:textColor="?attr/colorSecondaryVariant"
             android:textFontWeight="400"
             android:textSize="11sp" />

@@ -331,14 +331,14 @@ public class EditTaskActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         List<Project> sampleProjects = new ArrayList<>();
-        sampleProjects.add(new Project(1L, "ProTrack", "Project tracking tool", "2025-07-01", 100L));
-        sampleProjects.add(new Project(2L, "WireFrame Kit", "Design wireframe templates", "2025-07-02", 100L));
-        sampleProjects.add(new Project(3L, "Marketing Plan", "Q3 online ads", "2025-06-01", 100L));
-        sampleProjects.add(new Project(4L, "AI Research", "Model evaluation and tuning", "2025-05-15", 100L));
-        sampleProjects.add(new Project(5L, "Mobile Redesign", "New layout for Android app", "2025-04-20", 100L));
-        sampleProjects.add(new Project(6L, "E-learning", "LMS content structure", "2025-03-28", 100L));
-        sampleProjects.add(new Project(7L, "Recruitment System", "HR automation", "2025-02-12", 100L));
-        sampleProjects.add(new Project(8L, "Data Warehouse", "ETL flow rebuild", "2025-01-07", 100L));
+//        sampleProjects.add(new Project(1L, "ProTrack", "Project tracking tool", "2025-07-01", 100L));
+//        sampleProjects.add(new Project(2L, "WireFrame Kit", "Design wireframe templates", "2025-07-02", 100L));
+//        sampleProjects.add(new Project(3L, "Marketing Plan", "Q3 online ads", "2025-06-01", 100L));
+//        sampleProjects.add(new Project(4L, "AI Research", "Model evaluation and tuning", "2025-05-15", 100L));
+//        sampleProjects.add(new Project(5L, "Mobile Redesign", "New layout for Android app", "2025-04-20", 100L));
+//        sampleProjects.add(new Project(6L, "E-learning", "LMS content structure", "2025-03-28", 100L));
+//        sampleProjects.add(new Project(7L, "Recruitment System", "HR automation", "2025-02-12", 100L));
+//        sampleProjects.add(new Project(8L, "Data Warehouse", "ETL flow rebuild", "2025-01-07", 100L));
 
 
         ProjectSelectAdapter adapter = new ProjectSelectAdapter(sampleProjects, project -> {

@@ -1,11 +1,13 @@
 package com.example.protrack.ui.adapters;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.protrack.R;
 import com.example.protrack.databinding.ComponentNotificationListItemBinding;
 import com.example.protrack.model.Notification;
 
@@ -29,8 +31,11 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
         public void bind(Notification notification) {
 
-            binding.name.setText(notification.getUserName());
+            binding.name.setText(notification.getSenderName());
             binding.message.setText(notification.getMessage());
+
+            int bgResId = notification.getIsRead() ? R.drawable.bg_unread_notification : R.drawable.bg_contained_18;
+            binding.getRoot().setBackgroundResource(bgResId);
 
             binding.deleteButton.setOnClickListener(v -> {
                 int index = notificationList.indexOf(notification);

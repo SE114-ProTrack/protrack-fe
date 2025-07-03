@@ -1,35 +1,36 @@
-package com.example.protrack.model;
+package com.example.protrack.model.response;
 
-public class Notification {
-    private String id;
-    private String senderAvt;     // Đường dẫn URL ảnh avatar
+public class NotificationResponse {
+
+    private String notificationId;
+    private String senderAvt;
     private String senderName;
     private String receiverId;
     private String receiverFullName;
     private String type;
-    private String message;
+    private String content;
     private boolean isRead;
     private String timestamp;
     private String actionUrl;
 
-    public Notification(String id, String senderAvt, String senderName,
-                        String receiverId, String receiverFullName, String type,
-                        String message, boolean isRead, String timestamp, String actionUrl) {
-        this.id = id;
+    public NotificationResponse(String notificationId, String senderAvt, String senderName,
+                                String receiverId, String receiverFullName, String type,
+                                String content, boolean isRead, String timestamp, String actionUrl) {
+        this.notificationId = notificationId;
         this.senderAvt = senderAvt;
         this.senderName = senderName;
         this.receiverId = receiverId;
         this.receiverFullName = receiverFullName;
         this.type = type;
-        this.message = message;
+        this.content = content;
         this.isRead = isRead;
         this.timestamp = timestamp;
         this.actionUrl = actionUrl;
     }
 
     // Getters
-    public String getId() {
-        return id;
+    public String getNotificationId() {
+        return notificationId;
     }
 
     public String getSenderAvt() {
@@ -52,8 +53,8 @@ public class Notification {
         return type;
     }
 
-    public String getMessage() {
-        return message;
+    public String getContent() {
+        return content;
     }
 
     public boolean getIsRead() {
@@ -67,4 +68,5 @@ public class Notification {
     public String getActionUrl() {
         return actionUrl;
     }
+
 }

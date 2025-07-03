@@ -36,15 +36,11 @@ public class ProjectCarouselAdapter extends RecyclerView.Adapter<ProjectCarousel
 
         public void bind(Project project) {
             binding.projectName.setText(project.getTenDuAn());
-
-            binding.description.setText(Utils.limitString(project.getMoTa(), 21)
-                    + " - " + project.getThoiGianTao());
-
-            //binding.dayLeft.setText(project.getDate());
-            //binding.progressBar.setProgress(project.getProgress());
-
-            // TODO: Load image or icon if needed
-            // Example: Glide.with(binding.avatar.getContext()).load(project.getImageUrl()).into(binding.avatar);
+            binding.description.setText(Utils.limitString(project.getMoTa(), 36));
+            binding.completedTask.setText(String.valueOf(project.getTaskHoanThanh()));
+            binding.totalTask.setText("/" + project.getTongTask() + " task");
+            binding.progressBar.setProgress((int)((float)project.getTaskHoanThanh() / project.getTongTask() * 100));
+            binding.taskLeft.setText(project.getTongTask() - project.getTaskHoanThanh() + " task left");
 
             binding.getRoot().setOnClickListener(v -> listener.onProjectClick(project));
         }

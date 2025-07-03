@@ -1,20 +1,16 @@
 package com.example.protrack.model;
 
-import com.google.gson.annotations.SerializedName;
-
 public class LoginRequest {
-    @SerializedName("email")
     private String email;
-    @SerializedName("matKhau")
-    private String matKhau;
+    private String password;
 
     // Constructor
-    public LoginRequest(String email, String matKhau) {
+    public LoginRequest(String email, String password) {
         this.email = email;
-        this.matKhau = matKhau;
+        this.password = password;
     }
 
     // Getters
     public String getEmail() { return email; }
-    public String getMatKhau() { return matKhau; }
+    public String getPassword() { return password; }
 }

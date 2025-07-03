@@ -6,11 +6,15 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.protrack.databinding.ComponentProjectListItemBinding;
 import com.example.protrack.model.Project;
 import com.example.protrack.utils.Utils;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Locale;
 
 public class ProjectListAdapter extends RecyclerView.Adapter<ProjectListAdapter.ProjectViewHolder> {
 
@@ -36,15 +40,15 @@ public class ProjectListAdapter extends RecyclerView.Adapter<ProjectListAdapter.
 
         public void bind(Project project) {
             binding.projectName.setText(project.getTenDuAn());
+            binding.description.setText(Utils.limitString(project.getMoTa(), 36));
+            binding.completedTask.setText(String.valueOf(project.getTaskHoanThanh()));
+            binding.totalTask.setText("/" + project.getTongTask() + " task");
+            binding.progressBar.setProgress((int)((float)project.getTaskHoanThanh() / project.getTongTask() * 100));
+            binding.taskLeft.setText(project.getTongTask() - project.getTaskHoanThanh() + " task left");
 
-            binding.description.setText(Utils.limitString(project.getMoTa(), 21)
-                    + " - " + project.getThoiGianTao());
-
-            //binding.dayLeft.setText(project.getDate());
-            //binding.progressBar.setProgress(project.getProgress());
-
-            // TODO: Load image or icon if needed
-            // Example: Glide.with(binding.avatar.getContext()).load(project.getImageUrl()).into(binding.avatar);
+            Glide.with(binding.projectBanner.getContext())
+                    .load(project.getAnhBiaDuAn())
+                    .into(binding.projectBanner);
 
             binding.getRoot().setOnClickListener(v -> listener.onProjectClick(project));
         }

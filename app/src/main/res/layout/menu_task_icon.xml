@@ -32,6 +32,7 @@
                 android:textSize="16sp" />
 
             <ImageButton
+                android:id="@+id/addIconandColor"
                 android:layout_width="26dp"
                 android:layout_height="26dp"
                 android:background="@drawable/bg_transparent"
@@ -51,6 +52,7 @@
 
             <!-- Icon 1 -->
             <FrameLayout
+
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -65,7 +67,7 @@
                     android:background="@drawable/bg_avatar_circle" />
 
                 <ImageView
-                    android:id="@+id/editIcon1"
+                    android:id="@+id/editIcon"
                     android:layout_width="18dp"
                     android:layout_height="18dp"
                     android:layout_gravity="top|end"
@@ -84,14 +86,14 @@
                 android:layout_marginStart="8dp">
 
                 <ImageView
-                    android:id="@+id/taskIcon2"
+                    android:id="@+id/taskColor"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:scaleType="centerInside"
                     android:background="@color/colorSecondaryVariant" />
 
                 <ImageView
-                    android:id="@+id/editIcon2"
+                    android:id="@+id/editColor"
                     android:layout_width="18dp"
                     android:layout_height="18dp"
                     android:layout_gravity="top|end"

@@ -18,6 +18,8 @@ public class ProjectListActivity extends AppCompatActivity {
 
     private ActivityProjectListBinding binding;
     private ProjectListAdapter adapter;
+    private static final int REQUEST_CODE_CREATE_PROJECT = 1001;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -31,11 +33,13 @@ public class ProjectListActivity extends AppCompatActivity {
     }
 
     private void setupListeners() {
-        // quay về
-        binding.backButton.setOnClickListener(v -> {
-            finish();
+        //quay về
+        binding.backButton.setOnClickListener(v -> finish());
+// tạo project
+        binding.createButton.setOnClickListener(v -> {
+            Intent intent = new Intent(ProjectListActivity.this, CreateProjectActivity.class);
+            startActivityForResult(intent, REQUEST_CODE_CREATE_PROJECT);
         });
-
     }
 
     private void setupProjectList() {
@@ -62,4 +66,15 @@ public class ProjectListActivity extends AppCompatActivity {
         super.onDestroy();
         binding = null;
     }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE_CREATE_PROJECT && resultCode == RESULT_OK && data != null) {
+            Project newProject = (Project) data.getSerializableExtra("newProject");
+            if (newProject != null) {
+//                adapter.addProject(newProject);
+            }
+        }
+    }
+
 }

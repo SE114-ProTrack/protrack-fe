@@ -1,63 +1,76 @@
 package com.example.protrack.ui.activities;
-import com.example.protrack.R;
-import android.app.Activity;
+
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.protrack.R;
 import com.example.protrack.model.Comment;
 
 import java.util.List;
 
-public class CommentCardAdapter extends BaseAdapter {
-    private Activity context;
-    private List<Comment> commentList;
-    private int visibleItemCount;
+public class CommentCardAdapter extends RecyclerView.Adapter<CommentCardAdapter.CommentViewHolder> {
+    private final Context context;
+    private final List<Comment> commentList;
+    private int visibleCount;
 
-    public CommentCardAdapter(Activity context, List<Comment> commentList, int visibleItemCount) {
+    public CommentCardAdapter(Context context, List<Comment> commentList, int visibleCount) {
         this.context = context;
         this.commentList = commentList;
-        this.visibleItemCount = visibleItemCount;
+        this.visibleCount = Math.min(visibleCount, commentList.size());
     }
-    public void increaseVisibleItemCount(int amount) {
-        visibleItemCount = Math.min(visibleItemCount + amount, commentList.size());
+
+    public void increaseVisibleItemCount(int count) {
+        visibleCount = Math.min(visibleCount + count, commentList.size());
         notifyDataSetChanged();
     }
 
-    @Override
-    public int getCount() {
-        return Math.min(visibleItemCount, commentList.size());
+    public void setVisibleCount(int count) {
+        visibleCount = Math.min(count, commentList.size());
+        notifyDataSetChanged();
     }
+
+    @NonNull
     @Override
-    public Object getItem(int position) {
-        return commentList.get(position);
+    public CommentViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(context).inflate(R.layout.activity_comment_card, parent, false);
+        return new CommentViewHolder(view);
     }
 
     @Override
-    public long getItemId(int position) {
-        return position;
+    public void onBindViewHolder(@NonNull CommentViewHolder holder, int position) {
+        Comment comment = commentList.get(position);
+        holder.bind(comment);
     }
 
     @Override
-    public View getView(int position, View view, ViewGroup parent) {
-        if (view == null) {
-            view = LayoutInflater.from(context).inflate(R.layout.activity_comment_card, parent, false);
+    public int getItemCount() {
+        return Math.min(visibleCount, commentList.size());
+    }
+
+    static class CommentViewHolder extends RecyclerView.ViewHolder {
+        TextView contentText, name, time;
+        ImageView avatar;
+
+        public CommentViewHolder(@NonNull View itemView) {
+            super(itemView);
+            contentText = itemView.findViewById(R.id.comment_text);
+            name = itemView.findViewById(R.id.comment_name);
+            time = itemView.findViewById(R.id.comment_time);
+            avatar = itemView.findViewById(R.id.avatar);
         }
 
-        Comment comment = commentList.get(position);
-
-        TextView name = view.findViewById(R.id.tv_name);
-        TextView time = view.findViewById(R.id.tv_time);
-        TextView content = view.findViewById(R.id.comment_text);
-        ImageView avatar = view.findViewById(R.id.avatar); // Có thể thay ảnh nếu cần
-
-        name.setText(comment.getName());
-        time.setText(comment.getTime());
-        content.setText(comment.getContent());
-
-        return view;
+        public void bind(Comment comment) {
+            contentText.setText(comment.getContent());
+            name.setText(comment.getName());
+            time.setText(comment.getTime());
+            avatar.setImageResource(comment.getAvatarResId());
+        }
     }
 }

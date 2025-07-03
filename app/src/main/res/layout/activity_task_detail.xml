@@ -108,12 +108,12 @@
             android:textColor="#26495C"
             android:textSize="14sp"
            />
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="16dp"
-            tools:ignore="MissingConstraints"
-           >
+            tools:ignore="MissingConstraints">
 
             <!-- 🔘 Assign -->
 
@@ -121,11 +121,11 @@
                 android:id="@+id/ic_assign"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/ic_assign"
-                app:tint="#244960"
+                android:src="@drawable/ic_member"
+                app:layout_constraintStart_toStartOf="parent"
 
-            app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="#244960" />
 
             <TextView
                 android:id="@+id/label_assign"
@@ -143,8 +143,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-      >
+                app:layout_constraintEnd_toEndOf="parent">
 
                 <!-- You can repeat these ImageViews -->
                 <ImageView
@@ -172,10 +171,11 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_marginTop="16dp"
-                app:tint="#244960"
-            android:src="@drawable/ic_person"
+                android:src="@drawable/ic_user"
+                android:backgroundTint="@color/colorPrimary"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/ic_assign" />
+                app:layout_constraintTop_toBottomOf="@id/ic_assign"
+                app:tint="#244960" />
 
             <TextView
                 android:id="@+id/label_moderator"
@@ -223,10 +223,10 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_marginTop="16dp"
-                app:tint="#244960"
                 android:src="@drawable/ic_check_done"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/ic_moderator" />
+                app:layout_constraintTop_toBottomOf="@id/ic_moderator"
+                app:tint="#244960" />
 
             <TextView
                 android:id="@+id/label_status"
@@ -262,10 +262,10 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_marginTop="16dp"
-                app:tint="#244960"
                 android:src="@drawable/ic_clockcircle"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/ic_status" />
+                app:layout_constraintTop_toBottomOf="@id/ic_status"
+                app:tint="#244960" />
 
             <TextView
                 android:id="@+id/label_due"
@@ -293,9 +293,9 @@
                 android:layout_height="24dp"
                 android:layout_marginTop="16dp"
                 android:src="@drawable/ic_flag"
-                app:tint="#244960"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/ic_due" />
+                app:layout_constraintTop_toBottomOf="@id/ic_due"
+                app:tint="#244960" />
 
             <TextView
                 android:id="@+id/label_label"
@@ -363,11 +363,11 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_marginTop="16dp"
-                android:src="@drawable/ic_gridview"
-                app:tint="#244960"
-
+                android:src="@drawable/ic_project"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/ic_label" />
+
+                app:layout_constraintTop_toBottomOf="@id/ic_label"
+                app:tint="#244960" />
 
             <TextView
                 android:id="@+id/label_attach"
@@ -400,6 +400,7 @@
                 app:strokeWidth="1dp" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_edit"
             android:layout_width="match_parent"
@@ -448,44 +449,41 @@
 
             <!-- Right Icon -->
             <ImageView
-                android:id="@+id/imageView2"
+                android:id="@+id/seeSubTaskActivity"
                 android:layout_width="16dp"
                 android:layout_height="16dp"
                 app:tint="#244960"
                 app:srcCompat="@drawable/ic_chervonright" />
         </LinearLayout>
-        <ListView
-            android:id="@+id/listviewsubtask"
-            android:layout_width="match_parent"
-            android:layout_height="191dp"
-            android:layout_marginTop="8dp"
-            android:divider="@android:color/transparent"
-            android:dividerHeight="-6dp"
-            app:cardElevation="4dp"
-            android:layout_marginBottom="10dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_subtask_expand"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:text="Expand"
-            android:layout_marginBottom="10dp"
-            android:textColor="#26495C"
-            android:backgroundTint="@android:color/transparent"
-            android:insetLeft="0dp"
-            android:insetTop="0dp"
-            android:insetRight="0dp"
-            android:insetBottom="0dp"
-            app:cornerRadius="24dp"
-            app:strokeColor="#26495C"
-            app:strokeWidth="2dp"
-            app:icon="@drawable/ic_expand"
-            app:iconGravity="textStart"
-            app:iconPadding="8dp"
-            app:iconTint="#26495C" />
+<!--        <androidx.recyclerview.widget.RecyclerView-->
+<!--            android:id="@+id/listviewsubtask"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:clipToPadding="false"-->
+<!--            android:overScrollMode="never"-->
+<!--            android:padding="5dp"-->
+<!--            android:scrollbars="none" />-->
+
+<!--        <com.google.android.material.button.MaterialButton-->
+<!--            android:id="@+id/btn_subtask_expand"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="40dp"-->
+<!--            android:text="Expand"-->
+<!--            android:layout_marginBottom="10dp"-->
+<!--            android:textColor="#26495C"-->
+<!--            android:backgroundTint="@android:color/transparent"-->
+<!--            android:insetLeft="0dp"-->
+<!--            android:insetTop="0dp"-->
+<!--            android:insetRight="0dp"-->
+<!--            android:insetBottom="0dp"-->
+<!--            app:cornerRadius="24dp"-->
+<!--            app:strokeColor="#26495C"-->
+<!--            app:strokeWidth="2dp"-->
+<!--            app:icon="@drawable/ic_expand"-->
+<!--            app:iconGravity="textStart"-->
+<!--            app:iconPadding="8dp"-->
+<!--            app:iconTint="#26495C" />-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -519,14 +517,12 @@
                 app:tint="#244960"
                 android:src="@drawable/ic_chervonright" />
         </LinearLayout>
-        <ListView
-            android:id="@+id/listviewComment"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerviewComment"
             android:layout_width="match_parent"
-            android:layout_height="191dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:divider="@android:color/transparent"
-            android:dividerHeight="-6dp"
-            app:cardElevation="4dp"
             android:layout_marginBottom="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -553,7 +549,9 @@
             android:layout_width="match_parent"
             android:layout_height="66dp"
             android:orientation="horizontal"
-            android:padding="8dp"
+            android:paddingStart="8dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
             android:gravity="center_vertical"
             android:background="@android:color/white">
 
@@ -575,7 +573,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/bg_comment_input"
                 android:paddingStart="16dp"
-                android:paddingEnd="36dp"
+                android:paddingEnd="18dp"
                 android:paddingVertical="10dp">
 
                 <!-- EditText nhập comment -->
@@ -600,7 +598,7 @@
                     android:layout_height="24dp"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:src="@drawable/ic_send"
+                    android:src="@drawable/ic_move"
                     android:background="@null"
                     android:contentDescription="Send"
                     app:tint="#26495C" />

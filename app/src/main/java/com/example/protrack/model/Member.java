@@ -4,27 +4,29 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Member implements Parcelable {
+    private String id;
     private String name;
     private String role;
-    private String statusText;
-    private int avatarUrl;
-    private boolean isSelected;
+    private String status;
+    private int avatarResId; // Dùng int để lưu ảnh từ resource
+    private boolean selected;
 
-    public Member(String name, String role, String statusText, int avatarUrl, boolean isSelected) {
+    public Member(String id, String name, String role, String status, int avatarResId, boolean selected) {
+        this.id = id;
         this.name = name;
         this.role = role;
-        this.statusText = statusText;
-        this.avatarUrl = avatarUrl;
-        this.isSelected = isSelected;
+        this.status = status;
+        this.avatarResId = avatarResId;
+        this.selected = selected;
     }
 
-    // Constructor dùng cho Parcelable
     protected Member(Parcel in) {
+        id = in.readString();
         name = in.readString();
         role = in.readString();
-        statusText = in.readString();
-        avatarUrl = in.readInt();
-        isSelected = in.readByte() != 0; // true nếu byte != 0
+        status = in.readString();
+        avatarResId = in.readInt();
+        selected = in.readByte() != 0;
     }
 
     public static final Creator<Member> CREATOR = new Creator<Member>() {
@@ -39,21 +41,10 @@ public class Member implements Parcelable {
         }
     };
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(name);
-        dest.writeString(role);
-        dest.writeString(statusText);
-        dest.writeInt(avatarUrl);
-        dest.writeByte((byte) (isSelected ? 1 : 0));
+    public String getId() {
+        return id;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    // Getters và Setters
     public String getName() {
         return name;
     }
@@ -62,23 +53,34 @@ public class Member implements Parcelable {
         return role;
     }
 
-    public String getStatusText() {
-        return statusText;
-    }
-
-    public int getAvatarUrl() {
-        return avatarUrl;
-    }
-
-    public boolean isSelected() {
-        return isSelected;
-    }
-
-    public void setSelected(boolean selected) {
-        isSelected = selected;
+    public String getStatus() {
+        return status;
     }
 
     public int getAvatarResId() {
-        return avatarUrl;
+        return avatarResId;
+    }
+
+    public boolean isSelected() {
+        return selected;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(id);
+        parcel.writeString(name);
+        parcel.writeString(role);
+        parcel.writeString(status);
+        parcel.writeInt(avatarResId);
+        parcel.writeByte((byte) (selected ? 1 : 0));
     }
 }

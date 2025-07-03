@@ -18,6 +18,7 @@ import com.example.protrack.ui.adapters.ProjectMemberListAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class ProjectMemberListFragment extends Fragment {
 
@@ -54,8 +55,24 @@ public class ProjectMemberListFragment extends Fragment {
 
     private void loadMockMembers() {
         List<Member> mockList = new ArrayList<>();
-        mockList.add(new Member("Tien Tom", "UI / UX Designer", "Online", R.drawable.ic_user, false));
-        mockList.add(new Member("Tom Tien", "Leader", "Offline 2h ago", R.drawable.ic_user, false));
+
+        mockList.add(new Member(
+                UUID.randomUUID().toString(), // id
+                "Tien Tom",                   // name
+                "UI / UX Designer",           // role
+                "Online",                     // status
+                R.drawable.ic_user,           // avatar
+                false                         // selected
+        ));
+
+        mockList.add(new Member(
+                UUID.randomUUID().toString(),
+                "Tom Tien",
+                "Leader",
+                "Offline 2h ago",
+                R.drawable.ic_user,
+                false
+        ));
         projectMemberAdapter.setMembers(mockList);
     }
 

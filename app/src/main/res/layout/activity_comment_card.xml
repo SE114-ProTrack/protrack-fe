@@ -12,19 +12,19 @@
         android:layout_height="40dp"
         android:scaleType="centerCrop"
         android:src="@drawable/ic_user"
-        android:layout_marginEnd="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <!-- Name -->
     <TextView
-        android:id="@+id/tv_name"
+        android:id="@+id/comment_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Tien Tom"
         android:textColor="#26495C"
         android:textSize="14sp"
         android:textStyle="bold"
+        android:layout_marginStart="10dp"
         app:layout_constraintStart_toEndOf="@id/avatar"
         app:layout_constraintTop_toTopOf="@id/avatar"
         app:layout_constraintEnd_toStartOf="@id/more_icon"
@@ -32,14 +32,14 @@
 
     <!-- Time -->
     <TextView
-        android:id="@+id/tv_time"
+        android:id="@+id/comment_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="3 hours ago"
         android:textColor="#999999"
         android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="@id/tv_name"
-        app:layout_constraintTop_toBottomOf="@id/tv_name" />
+        app:layout_constraintStart_toStartOf="@id/comment_name"
+        app:layout_constraintTop_toBottomOf="@id/comment_name" />
 
     <!-- Three-dot menu -->
     <ImageButton
@@ -47,11 +47,12 @@
         android:layout_width="24dp"
         android:layout_height="20dp"
         app:tint="#244960"
+        android:layout_marginEnd="25dp"
         android:background="?selectableItemBackgroundBorderless"
         android:contentDescription="More options"
         android:src="@drawable/ic_more"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/tv_name" />
+        app:layout_constraintTop_toTopOf="@id/comment_name" />
 
     <!-- Comment content -->
     <TextView
@@ -66,4 +67,15 @@
         app:layout_constraintTop_toBottomOf="@id/avatar"
         app:layout_constraintEnd_toEndOf="parent"
         android:lineSpacingExtra="2dp" />
+    <!-- Divider line -->
+    <View
+        android:id="@+id/divider_line"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="12dp"
+        android:background="@color/colorPrimary"
+        app:layout_constraintTop_toBottomOf="@id/comment_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>

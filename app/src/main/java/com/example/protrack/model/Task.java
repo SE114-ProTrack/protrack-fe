@@ -2,47 +2,76 @@ package com.example.protrack.model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.UUID;
 
 public class Task implements Serializable {
+    private String id;
     private String title;
-    private String category;
-    private String code;
+    private String description;
     private LocalDate dueDate;
-    public Task(String title, String category, String code, LocalDate dueDate) {
+    private String status;
+    private String labelId;
+    private Attachment attachment;
+    private List<String> assigneeIds;
+    private String icon;
+    private String color;
+    private String projectName;
+
+
+    public Task(String id, String title, String description, LocalDate dueDate,
+                String status, String labelId, Attachment attachment,
+                List<String> assigneeIds, String icon, String color, String projectName) {
+        this.id = id;
         this.title = title;
-        this.category = category;
-        this.code = code;
-        this.dueDate= dueDate;
+        this.description = description;
+        this.dueDate = dueDate;
+        this.status = status;
+        this.labelId = labelId;
+        this.attachment = attachment;
+        this.assigneeIds = assigneeIds;
+        this.icon = icon;
+        this.color = color;
+        this.projectName = projectName;
+    }
+    public String getProjectName() {
+        return projectName;
     }
 
+
+    // Getter
+    public String getId() { return id; }
     public String getTitle() { return title; }
-    public String getCategory() { return category; }
-    public String getCode() { return code; }
-    public int getDay() { return dueDate.getDayOfMonth(); }
-    public int getMonth() { return dueDate.getMonthValue(); }
-    public int getYear() { return dueDate.getYear(); }
-    // Trả về chuỗi "01" cho ngày
-    public String getDayStr() {
-        return String.format("%02d", dueDate.getDayOfMonth());
-    }
-
-    // Trả về chuỗi "01/07/2025" hoặc "Jul 01 2025"
-    public String getFullDateStr() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        return dueDate.format(formatter);
-    }
+    public String getDescription() { return description; }
     public LocalDate getDueDate() { return dueDate; }
-    public void setDueDate(LocalDate date) { this.dueDate = date; }
+    public String getStatus() { return status; }
+    public String getLabelId() { return labelId; }
+    public Attachment getAttachment() { return attachment; }
+    public List<String> getAssigneeIds() { return assigneeIds; }
+    public String getIcon() { return icon; }
+    public String getColor() { return color; }
 
-    public static class SubTask implements Serializable {
-        private String title;
-        public SubTask(String title) {
-            this.title = title;
+
+    // Nested Attachment class
+    public static class Attachment implements Serializable {
+        private String id;
+        private String name;
+        private String filePath;
+        private String fileUrl;
+        private String fileType;
+
+        public Attachment(String id, String name, String filePath, String fileUrl, String fileType) {
+            this.id = id;
+            this.name = name;
+            this.filePath = filePath;
+            this.fileUrl = fileUrl;
+            this.fileType = fileType;
         }
-        public String getTitle() { return title; }
+
+        public String getId() { return id; }
+        public String getName() { return name; }
+        public String getFilePath() { return filePath; }
+        public String getFileUrl() { return fileUrl; }
+        public String getFileType() { return fileType; }
     }
-
-
 }
-

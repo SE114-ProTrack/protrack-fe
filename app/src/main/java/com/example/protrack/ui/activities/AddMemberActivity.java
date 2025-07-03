@@ -35,8 +35,8 @@ public class AddMemberActivity extends AppCompatActivity {
         txtSelectedCount = findViewById(R.id.txtSelectedCount);
         addMemberBtn= findViewById(R.id.addMemberBtn);
         members = new ArrayList<>();
-        members.add(new Member("Alice", "Designer", "Online", R.drawable.ic_user, false));
-        members.add(new Member("Bob", "Dev", "Offline 2h ago", R.drawable.ic_user, false));
+        members.add(new Member("1", "Alice", "Designer", "Online", R.drawable.ic_user, false));
+        members.add(new Member("2", "Bob", "Dev", "Offline 2h ago", R.drawable.ic_user, false));
 
         adapter = new MemberAdapter(this, members);
         memberRecycleView.setLayoutManager(new LinearLayoutManager(this)); // <== BẮT BUỘC CHO RECYCLER VIEW

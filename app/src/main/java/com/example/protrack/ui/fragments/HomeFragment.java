@@ -1,5 +1,6 @@
 package com.example.protrack.ui.fragments;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -16,6 +17,7 @@ import android.widget.PopupWindow;
 import com.example.protrack.R;
 
 import com.example.protrack.databinding.FragmentHomeBinding;
+import com.example.protrack.ui.activities.CreateProjectActivity;
 import com.example.protrack.ui.activities.EditTaskActivity;
 
 public class HomeFragment extends Fragment {
@@ -62,9 +64,11 @@ public class HomeFragment extends Fragment {
         menuView.findViewById(R.id.create_project).setOnClickListener(v -> {
             popupWindow.dismiss();
 
-//            Intent intent = new Intent(getContext(), ProfileActivity.class);
-//            startActivity(intent);
+            Context context = v.getContext(); // Lấy context từ view
+            Intent intent = new Intent(context, CreateProjectActivity.class);
+            context.startActivity(intent);
         });
+
 
         menuView.findViewById(R.id.create_task).setOnClickListener(v -> {
             popupWindow.dismiss();

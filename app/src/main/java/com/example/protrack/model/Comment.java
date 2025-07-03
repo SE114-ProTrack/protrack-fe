@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 public class Comment implements Serializable {
     private String name;
+//    private String user;
+
     private String time;
     private String content;
     private int avatarResId;
@@ -29,4 +31,8 @@ public class Comment implements Serializable {
     public int getAvatarResId() {
         return avatarResId;
     }
+//    public String getUser() {
+//        return user;
+//    }
+
 }

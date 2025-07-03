@@ -75,6 +75,13 @@
         <activity
             android:name=".ui.activities.EditTaskActivity"
             android:exported="false" />
+        <activity
+            android:name=".ui.activities.CreateProjectActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.SubTaskListActivity"
+            android:exported="false" />
+
     </application>
 
 </manifest>

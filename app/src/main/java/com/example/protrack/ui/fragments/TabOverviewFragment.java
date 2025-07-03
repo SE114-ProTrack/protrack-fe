@@ -24,6 +24,7 @@ import com.example.protrack.ui.adapters.TaskListAdapter;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class TabOverviewFragment extends Fragment {
 
@@ -93,10 +94,38 @@ public class TabOverviewFragment extends Fragment {
 
     private void loadMockTasks() {
         List<Task> mockList = new ArrayList<>();
-        mockList.add(new Task("Wireframe - ProTrack", "Design", "SE332", LocalDate.of(2025, 7, 1)));
-        mockList.add(new Task("Wireframe - ProTrack", "Design", "SE332", LocalDate.of(2020, 7, 1)));
+
+        mockList.add(new Task(
+                UUID.randomUUID().toString(),          // id
+                "Wireframe - ProTrack",                // title
+                "Thiết kế UI phần đầu",                // description
+                LocalDate.of(2025, 7, 1),              // dueDate
+                "Not Started",                         // status
+                "SE332",                               // labelId
+                null,                                  // attachment (có thể là null nếu chưa cần test file)
+                new ArrayList<>(),                     // assigneeIds (danh sách thành viên được giao)
+                "ic_design",                           // icon (tên biểu tượng)
+                "#FFA500",                             // color (mã màu)
+                "ProTrack Project"                     // projectName (bạn cần thêm thuộc tính này vào class Task)
+        ));
+
+        mockList.add(new Task(
+                UUID.randomUUID().toString(),
+                "Fix animation bug",
+                "Sửa lỗi hoạt ảnh khi chuyển task",
+                LocalDate.of(2020, 7, 1),
+                "Completed",
+                "SE332",
+                null,
+                new ArrayList<>(),
+                "ic_bug",
+                "#2196F3",
+                "ProTrack Project"
+        ));
+
         taskAdapter.setTasks(mockList);
     }
+
 
     @Override
     public void onDestroyView() {

@@ -49,7 +49,7 @@
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:contentDescription="Create"
-                android:src="@drawable/ic_plus"
+                android:src="@drawable/ic_white_plus"
                 android:background="@drawable/bg_contained_20_ripple" />
         </LinearLayout>
 

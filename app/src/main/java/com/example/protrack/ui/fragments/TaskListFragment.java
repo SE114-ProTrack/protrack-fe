@@ -20,6 +20,7 @@ import com.example.protrack.ui.adapters.TaskListAdapter;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class TaskListFragment extends Fragment {
 
@@ -56,10 +57,39 @@ public class TaskListFragment extends Fragment {
 
     private void loadMockTasks() {
         List<Task> mockList = new ArrayList<>();
-        mockList.add(new Task("Wireframe - ProTrack", "Design", "SE332", LocalDate.of(2025, 7, 1)));
-        mockList.add(new Task("Wireframe - ProTrack", "Design", "SE332",LocalDate.of(2025, 7, 1)));
+
+        mockList.add(new Task(
+                UUID.randomUUID().toString(),          // id
+                "Wireframe - ProTrack",                // title
+                "Thiết kế UI phần đầu",                // description
+                LocalDate.of(2025, 7, 1),              // dueDate
+                "Not Started",                         // status
+                "SE332",                               // labelId
+                null,                                  // attachment (có thể là null nếu chưa dùng)
+                new ArrayList<>(),                     // assigneeIds
+                "ic_design",                           // icon (string tên icon)
+                "#FFA500",                             // color (hex)
+                "ProTrack Project"                     // projectName
+        ));
+
+
+        mockList.add(new Task(
+                UUID.randomUUID().toString(),
+                "Database Schema",
+                "Thiết kế sơ đồ CSDL",
+                LocalDate.of(2025, 7, 10),
+                "In Progress",
+                "SE332",
+                null,
+                new ArrayList<>(),
+                "ic_db",
+                "#33A1FD",
+                "ProTrack Project"
+        ));
+
         taskAdapter.setTasks(mockList);
     }
+
 
     @Override
     public void onDestroyView() {

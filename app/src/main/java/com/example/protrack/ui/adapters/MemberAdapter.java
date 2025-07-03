@@ -50,11 +50,11 @@ public class MemberAdapter extends RecyclerView.Adapter<MemberAdapter.MemberView
 
         holder.txtName.setText(member.getName());
         holder.txtRole.setText(member.getRole());
-        holder.txtOnline.setText(member.getStatusText());
+        holder.txtOnline.setText(member.getStatus());
 
         holder.txtOnline.setVisibility(member.isSelected() ? View.INVISIBLE : View.VISIBLE);
         holder.imgCheck.setVisibility(member.isSelected() ? View.VISIBLE : View.INVISIBLE);
-        holder.dotOnline.setVisibility(member.getStatusText().toLowerCase().contains("online")
+        holder.dotOnline.setVisibility(member.getStatus().toLowerCase().contains("online")
                 ? View.VISIBLE : View.INVISIBLE);
 
         holder.layout.setBackgroundResource(member.isSelected()

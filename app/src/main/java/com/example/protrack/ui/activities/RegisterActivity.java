@@ -63,7 +63,7 @@ public class RegisterActivity extends AppCompatActivity {
             binding.emailLayout.setError(null);
         }
 
-        if (password.length() < 8) {
+        if (password.length() < 6) {
             binding.passwordLayout.setError("Password must be at least 8 characters");
             return;
         } else {

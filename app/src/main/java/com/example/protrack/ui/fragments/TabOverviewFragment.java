@@ -21,6 +21,8 @@ import com.example.protrack.model.Project;
 import com.example.protrack.model.Task;
 import com.example.protrack.model.response.PageProjectResponse;
 import com.example.protrack.model.response.ProjectResponse;
+import com.example.protrack.model.response.TaskResponse;
+import com.example.protrack.data.TaskService;
 import com.example.protrack.ui.activities.ProjectDetailActivity;
 import com.example.protrack.ui.activities.ProjectListActivity;
 import com.example.protrack.ui.activities.TaskDetailActivity;
@@ -44,6 +46,8 @@ public class TabOverviewFragment extends Fragment {
     private ProjectService projectService;
     private List<Project> projectList = new ArrayList<>();
 
+    private TaskService taskService;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -55,11 +59,12 @@ public class TabOverviewFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         projectService = ApiClient.getInstance().create(ProjectService.class);
+        taskService = ApiClient.getInstance().create(TaskService.class);
 
         setupProjectCarousel();
         setupTaskList();
         load3Projects();
-        loadMockTasks();
+        loadUserTasksFromApi();
 
         overviewTabBinding.seeProjectListButton.setOnClickListener(v -> {
             Intent intent = new Intent(requireContext(), ProjectListActivity.class);
@@ -140,16 +145,51 @@ public class TabOverviewFragment extends Fragment {
                 });
     }
 
-    private void loadMockTasks() {
-        List<Task> mockList = new ArrayList<>();
-//        mockList.add(new Task("Wireframe - ProTrack", "Design", "SE332", LocalDate.of(2025, 7, 1)));
-//        mockList.add(new Task("Wireframe - ProTrack", "Design", "SE332", LocalDate.of(2020, 7, 1)));
-        taskAdapter.setTasks(mockList);
+    private void loadUserTasksFromApi() {
+        String token = "Bearer " + SharedPrefsManager.getInstance(getContext()).getToken();
+        taskService.getTasksByUser(token).enqueue(new Callback<List<TaskResponse>>() {
+            @Override
+            public void onResponse(Call<List<TaskResponse>> call, Response<List<TaskResponse>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    List<Task> taskList = new ArrayList<>();
+                    for (TaskResponse t : response.body()) {
+                        taskList.add(new Task(
+                                t.getTaskId(),
+                                t.getTaskName(),
+                                t.getDescription(),
+                                t.getDeadline() != null ? LocalDate.parse(t.getDeadline().substring(0,10)) : null,
+                                t.getStatus(),
+                                null, // labelId
+                                null, // attachment
+                                new ArrayList<>(),
+                                t.getIcon(),
+                                t.getColor(),
+                                t.getProjectName()
+                        ));
+                    }
+                    taskAdapter.setTasks(taskList);
+                } else {
+                    Toast.makeText(getContext(), "Không tải được task", Toast.LENGTH_SHORT).show();
+                }
+            }
+            @Override
+            public void onFailure(Call<List<TaskResponse>> call, Throwable t) {
+                Toast.makeText(getContext(), "Lỗi kết nối: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
+
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         overviewTabBinding = null;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        load3Projects();
+        loadUserTasksFromApi();
     }
 }

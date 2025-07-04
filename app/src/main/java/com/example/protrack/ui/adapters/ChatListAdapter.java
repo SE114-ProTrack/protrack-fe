@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.protrack.R;
 import com.example.protrack.model.ChatSummary;
 
@@ -64,18 +65,15 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ChatVi
         // TODO: Load ảnh avatar nếu có (hiện bạn đang dùng drawable cố định)
         holder.avatarImage.setImageResource(R.drawable.ic_user); // placeholder
         // Dùng thư viện Glide hoặc Picasso để load ảnh từ URL như sau:
-
-    /*
-    Glide.with(context)
-         .load(item.getAvatarUrl()) // avatar từ URL
-         .placeholder(R.drawable.ic_user) // ảnh tạm trong khi chờ tải
-         .circleCrop() // bo tròn nếu muốn
-         .into(holder.avatarImage);
-    */
-
-        //  Ghi chú: Đừng quên thêm thư viện Glide vào build.gradle:
-        // implementation 'com.github.bumptech.glide:glide:4.16.0'
-        // Xử lý sự kiện click
+        if (item.getAvatarUrl() != null && !item.getAvatarUrl().isEmpty()) {
+            Glide.with(context)
+                    .load(item.getAvatarUrl())
+                    .placeholder(R.drawable.ic_user) // Ảnh mặc định nếu chưa có
+                    .circleCrop()
+                    .into(holder.avatarImage); // holder.avatarImage là ImageView
+        } else {
+            holder.avatarImage.setImageResource(R.drawable.ic_user);
+        }
         holder.itemView.setOnClickListener(v -> {
             if (onItemClickListener != null) {
                 onItemClickListener.onItemClick(item);

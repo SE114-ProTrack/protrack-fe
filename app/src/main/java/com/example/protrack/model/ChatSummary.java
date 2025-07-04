@@ -7,13 +7,22 @@ public class ChatSummary {
     private String timeAgo;        // Thời gian nhắn (VD: 10 mins ago)
     private int unreadCount;       // Số lượng tin chưa đọc
 
-    public ChatSummary(int avatarResId, String userName, String lastMessage, String timeAgo, int unreadCount) {
+    private String avatarUrl;
+    private String userId;
+
+
+    public ChatSummary(int avatarResId, String userName, String lastMessage, String timeAgo, int unreadCount, String avatarUrl, String userId) {
         this.avatarResId = avatarResId;
         this.userName = userName;
         this.lastMessage = lastMessage;
         this.timeAgo = timeAgo;
         this.unreadCount = unreadCount;
+        this.avatarUrl = avatarUrl;
+        this.userId = userId;
     }
+
+    public String getUserId() { return userId; }
+    public void setUserId(String userId) { this.userId = userId; }
 
     // Getters
     public int getAvatarResId() {
@@ -56,4 +65,7 @@ public class ChatSummary {
     public void setUnreadCount(int unreadCount) {
         this.unreadCount = unreadCount;
     }
+
+    public String getAvatarUrl() { return avatarUrl; }
+    public void setAvatarUrl(String avatarUrl) { this.avatarUrl = avatarUrl; }
 }

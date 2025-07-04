@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:gravity="start"
     android:orientation="horizontal"
-    android:padding="6dp">
+    android:paddingTop="4dp"
+    android:paddingBottom="4dp"
+    android:paddingStart="8dp">
 
     <ImageView
         android:layout_width="32dp"
@@ -17,9 +21,11 @@
         android:id="@+id/messageText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hi Jason! How are you?"
+        android:layout_marginStart="0dp"
+        android:maxWidth="280dp"
         android:background="@drawable/bg_received_message"
         android:padding="10dp"
         android:textColor="@color/colorPrimary"
         android:textSize="13sp" />
 </LinearLayout>
+

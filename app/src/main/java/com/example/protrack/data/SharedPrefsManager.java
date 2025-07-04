@@ -8,6 +8,9 @@ public class SharedPrefsManager {
     private static final String PREF_NAME = "MyAppPrefs";
     private static final String KEY_TOKEN = "jwt_token";
 
+    private static final String KEY_USER_ID = "user_id";
+
+
     private static SharedPrefsManager instance;
     private SharedPreferences prefs;
 
@@ -32,5 +35,13 @@ public class SharedPrefsManager {
 
     public void clearToken() {
         prefs.edit().remove(KEY_TOKEN).apply();
+    }
+
+    public void saveUserId(String userId) {
+        prefs.edit().putString(KEY_USER_ID, userId).apply();
+    }
+
+    public String getUserId() {
+        return prefs.getString(KEY_USER_ID, null);
     }
 }

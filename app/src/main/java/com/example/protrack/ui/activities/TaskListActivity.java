@@ -2,7 +2,7 @@ package com.example.protrack.ui.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.Nullable;
@@ -14,17 +14,26 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.protrack.R;
+import com.example.protrack.data.ApiClient;
+import com.example.protrack.data.SharedPrefsManager;
 import com.example.protrack.model.Task;
+import com.example.protrack.model.response.TaskResponse;
+import com.example.protrack.data.TaskService;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class TaskListActivity extends AppCompatActivity {
     private static final int REQUEST_EDIT_TASK = 100;
     private static final int REQUEST_CREATE_TASK = 101;
-private FloatingActionButton fabAddTask;
+    private FloatingActionButton fabAddTask;
     private RecyclerView recyclerView;
     private ArrayList<Task> taskList;
     private TaskCardAdapter taskAdapter;
@@ -40,63 +49,76 @@ private FloatingActionButton fabAddTask;
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        fabAddTask=findViewById(R.id.fabAddTask);
+
+        fabAddTask = findViewById(R.id.fabAddTask);
         fabAddTask.setOnClickListener(v -> {
             Intent intent = new Intent(TaskListActivity.this, EditTaskActivity.class);
             intent.putExtra("mode", "create");
             startActivityForResult(intent, REQUEST_CREATE_TASK);
         });
+
+        // KHỞI TẠO danh sách rỗng, sẽ lấy thật từ API
         taskList = new ArrayList<>();
-        taskList.add(new Task(
-                UUID.randomUUID().toString(),              // id
-                "Wireframe - ProTrack",                    // title
-                "Thiết kế UI đầu tiên",                    // description
-                LocalDate.of(2025, 7, 1),                  // dueDate
-                "Not Started",                             // status
-                "SE332",                                   // labelId
-                null,                                      // attachment
-                new ArrayList<>(),                         // assigneeIds
-                "ic_task",                                 // icon (tên icon)
-                "#FF5733",                                 // color
-                "ProTrack Project"                         // projectName
-        ));
-        taskList.add(new Task(
-                UUID.randomUUID().toString(),
-                "Fix bug animation",
-                "Sửa lỗi chuyển cảnh khi đổi trạng thái task",
-                LocalDate.of(2020, 10, 8),
-                "Completed",
-                "SE332",
-                null,
-                new ArrayList<>(),
-                "ic_bug",
-                "#00BCD4",
-                "ProTrack Project"
-        ));
 
-        // Khởi tạo RecyclerView
-        recyclerView = findViewById(R.id.taskList); // ID đúng của RecyclerView trong layout
+        recyclerView = findViewById(R.id.taskList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        // Khởi tạo adapter với callback khi click
         taskAdapter = new TaskCardAdapter(taskList, this, task -> {
             Intent intent = new Intent(TaskListActivity.this, EditTaskActivity.class);
             intent.putExtra("mode", "edit");
             intent.putExtra("task", task); // Task implements Serializable
             startActivityForResult(intent, REQUEST_EDIT_TASK);
         });
-
         recyclerView.setAdapter(taskAdapter);
 
         // Nút quay về
         findViewById(R.id.backButton).setOnClickListener(v -> finish());
+
+        // Gọi API thật để load danh sách task
+        loadTasksFromApi();
     }
+
+    private void loadTasksFromApi() {
+        String token = SharedPrefsManager.getInstance(this).getToken();
+        TaskService api = ApiClient.getInstance().create(TaskService.class);
+
+        api.getTasksByUser("Bearer " + token).enqueue(new Callback<List<TaskResponse>>() {
+            @Override
+            public void onResponse(Call<List<TaskResponse>> call, Response<List<TaskResponse>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    taskList.clear(); // Xóa data cũ
+                    for (TaskResponse t : response.body()) {
+                        taskList.add(new Task(
+                                t.getTaskId(),
+                                t.getTaskName(),
+                                t.getDescription(),
+                                t.getDeadline() != null ? LocalDate.parse(t.getDeadline().substring(0,10)) : null,
+                                t.getStatus(),
+                                null, // labelId
+                                null, // attachment
+                                new ArrayList<>(),
+                                t.getIcon(),
+                                t.getColor(),
+                                t.getProjectName()
+                        ));
+                    }
+                    taskAdapter.notifyDataSetChanged();
+                } else {
+                    Toast.makeText(TaskListActivity.this, "Không tải được danh sách task", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<TaskResponse>> call, Throwable t) {
+                Toast.makeText(TaskListActivity.this, "Lỗi kết nối: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && data != null) {
             Task updatedTask = (Task) data.getSerializableExtra("task");
-
             if (requestCode == REQUEST_CREATE_TASK) {
                 taskList.add(updatedTask);
             } else if (requestCode == REQUEST_EDIT_TASK) {
@@ -110,5 +132,4 @@ private FloatingActionButton fabAddTask;
             taskAdapter.notifyDataSetChanged();
         }
     }
-
 }

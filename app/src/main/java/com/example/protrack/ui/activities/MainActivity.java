@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private int primaryColor;
     private int defaultColor;
 
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

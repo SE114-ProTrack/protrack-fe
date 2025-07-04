@@ -11,9 +11,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.example.protrack.data.ApiClient;
+import com.example.protrack.data.SharedPrefsManager;
+import com.example.protrack.data.TaskService;
 import com.example.protrack.databinding.FragmentTaskListBinding;
 import com.example.protrack.model.Task;
+import com.example.protrack.model.response.TaskResponse;
 import com.example.protrack.ui.activities.TaskDetailActivity;
 import com.example.protrack.ui.adapters.TaskListAdapter;
 
@@ -22,10 +27,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class TaskListFragment extends Fragment {
+import retrofit2.Call;
 
+public class TaskListFragment extends Fragment {
     private FragmentTaskListBinding taskListBinding;
     private TaskListAdapter taskAdapter;
+
+    public void setTasks(List<Task> tasks) {
+        taskAdapter.setTasks(tasks);
+    }
 
     @Nullable
     @Override
@@ -38,14 +48,13 @@ public class TaskListFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         setupTaskList();
-        loadMockTasks();
-
+        loadTasksFromApi();
     }
 
     private void setupTaskList() {
         taskAdapter = new TaskListAdapter(new ArrayList<>(), task -> {
-            // TODO: Xử lý khi click vào một task
             Intent intent = new Intent(requireContext(), TaskDetailActivity.class);
+            // Bạn có thể truyền id hoặc object task qua intent nếu muốn
             startActivity(intent);
         });
 
@@ -55,41 +64,38 @@ public class TaskListFragment extends Fragment {
         taskListBinding.taskList.setAdapter(taskAdapter);
     }
 
-    private void loadMockTasks() {
-        List<Task> mockList = new ArrayList<>();
-
-        mockList.add(new Task(
-                UUID.randomUUID().toString(),          // id
-                "Wireframe - ProTrack",                // title
-                "Thiết kế UI phần đầu",                // description
-                LocalDate.of(2025, 7, 1),              // dueDate
-                "Not Started",                         // status
-                "SE332",                               // labelId
-                null,                                  // attachment (có thể là null nếu chưa dùng)
-                new ArrayList<>(),                     // assigneeIds
-                "ic_design",                           // icon (string tên icon)
-                "#FFA500",                             // color (hex)
-                "ProTrack Project"                     // projectName
-        ));
-
-
-        mockList.add(new Task(
-                UUID.randomUUID().toString(),
-                "Database Schema",
-                "Thiết kế sơ đồ CSDL",
-                LocalDate.of(2025, 7, 10),
-                "In Progress",
-                "SE332",
-                null,
-                new ArrayList<>(),
-                "ic_db",
-                "#33A1FD",
-                "ProTrack Project"
-        ));
-
-        taskAdapter.setTasks(mockList);
+    private void loadTasksFromApi() {
+        String token = SharedPrefsManager.getInstance(getContext()).getToken();
+        TaskService api = ApiClient.getInstance().create(TaskService.class);
+        api.getTasksByUser("Bearer " + token).enqueue(new retrofit2.Callback<List<TaskResponse>>() {
+            @Override
+            public void onResponse(Call<List<TaskResponse>> call, retrofit2.Response<List<TaskResponse>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    List<Task> taskList = new ArrayList<>();
+                    for (TaskResponse t : response.body()) {
+                        taskList.add(new Task(
+                                t.getTaskId(),
+                                t.getTaskName(),
+                                t.getDescription(),
+                                t.getDeadline() != null ? LocalDate.parse(t.getDeadline().substring(0,10)) : null,
+                                t.getStatus(),
+                                null, // labelId
+                                null, // attachment
+                                new ArrayList<>(),
+                                t.getIcon(),
+                                t.getColor(),
+                                t.getProjectName()
+                        ));
+                    }
+                    taskAdapter.setTasks(taskList);
+                }
+            }
+            @Override
+            public void onFailure(Call<List<TaskResponse>> call, Throwable t) {
+                Toast.makeText(getContext(), "Lỗi tải task: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
-
 
     @Override
     public void onDestroyView() {

@@ -1,8 +1,10 @@
 package com.example.protrack.ui.activities;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -21,11 +24,18 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.protrack.R;
+import com.example.protrack.data.ApiClient;
+import com.example.protrack.data.ProjectService;
+import com.example.protrack.data.SharedPrefsManager;
 import com.example.protrack.model.Member;
 import com.example.protrack.model.Project;
+import com.example.protrack.model.request.ProjectRequest;
+import com.example.protrack.model.response.ProjectResponse;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.chip.ChipGroup;
+import com.google.gson.Gson;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -34,6 +44,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.function.Consumer;
+
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import retrofit2.Call;
+
 public class CreateProjectActivity extends AppCompatActivity {
 
     private static final int PICK_IMAGE_REQUEST = 1;
@@ -56,15 +71,11 @@ private TextView txtDayNumber;
 
         addImageBtn = findViewById(R.id.addImageBtn);
         selectedImage = findViewById(R.id.selectedImage);
-        addMemberBtn = findViewById(R.id.add_member_btn);
         flowAssign = findViewById(R.id.flow_assign);
-        calendarView = findViewById(R.id.calendarView);
         projectNameEditText = findViewById(R.id.projectNameEditText);
         projectDescEditText = findViewById(R.id.projectDescEditText);
         saveButton = findViewById(R.id.btn_save_project);
         backBtn = findViewById(R.id.backButton);
-         txtFullDate = findViewById(R.id.fullDateText);
-         txtDayNumber = findViewById(R.id.dayNumberText);
         // Lấy ngày hiện tại
         Calendar calendar = Calendar.getInstance();
         int day = calendar.get(Calendar.DAY_OF_MONTH);
@@ -112,19 +123,50 @@ private TextView txtDayNumber;
         selectedImage.setOnClickListener(v -> openGallery());
         // Nhấn nút tạo project
         saveButton.setOnClickListener(v -> {
-//            String projectName = projectNameEditText.getText().toString();
-//            String projectDesc = projectDescEditText.getText().toString();
-//            String date = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(new Date());
-//
-//            Long id = System.currentTimeMillis(); // tạo ID tạm thời bằng timestamp
-//            Long userId = 1L; // Giả sử người tạo là user ID 1
-//
-//            Project newProject = new Project(id, projectName, projectDesc, date, userId);
-//
-//            Intent resultIntent = new Intent();
-//            resultIntent.putExtra("newProject", newProject);  // Project implements Serializable
-//            setResult(RESULT_OK, resultIntent);
-//            finish();
+            String projectName = projectNameEditText.getText().toString().trim();
+            String projectDesc = projectDescEditText.getText().toString().trim();
+
+            if (projectName.isEmpty()) {
+                projectNameEditText.setError("Vui lòng nhập tên dự án");
+                return;
+            }
+            // Tạo ProjectRequest
+            ProjectRequest request = new ProjectRequest(projectName, projectDesc, null);
+
+            // Convert ProjectRequest -> JSON string
+            Gson gson = new Gson();
+            String projectJson = gson.toJson(request);
+            RequestBody projectBody = RequestBody.create(projectJson, okhttp3.MediaType.parse("application/json"));
+
+            // Chuẩn bị file (nếu có)
+            MultipartBody.Part filePart = null;
+            if (selectedImage.getVisibility() == View.VISIBLE && selectedImage.getTag() != null) {
+                Uri imageUri = (Uri) selectedImage.getTag();
+                File file = new File(getRealPathFromUri(imageUri));
+                RequestBody reqFile = RequestBody.create(file, okhttp3.MediaType.parse("image/*"));
+                filePart = MultipartBody.Part.createFormData("file", file.getName(), reqFile);
+            }
+
+            // Gọi API
+            String token = SharedPrefsManager.getInstance(this).getToken();
+            ProjectService api = ApiClient.getInstance().create(ProjectService.class);
+            api.createProject("Bearer " + token, projectBody, filePart)
+                    .enqueue(new retrofit2.Callback<ProjectResponse>() {
+                        @Override
+                        public void onResponse(Call<ProjectResponse> call, retrofit2.Response<ProjectResponse> response) {
+                            if (response.isSuccessful() && response.body() != null) {
+                                Toast.makeText(CreateProjectActivity.this, "Tạo project thành công!", Toast.LENGTH_SHORT).show();
+                                finish();
+                            } else {
+                                Toast.makeText(CreateProjectActivity.this, "Tạo project thất bại!", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<ProjectResponse> call, Throwable t) {
+                            Toast.makeText(CreateProjectActivity.this, "Lỗi kết nối: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
         });
 
 
@@ -205,10 +247,25 @@ private TextView txtDayNumber;
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
             Uri imageUri = data.getData();
             selectedImage.setImageURI(imageUri);
+            selectedImage.setTag(imageUri);
 
             // Ẩn nút +, hiển thị ảnh
             addImageBtn.setVisibility(View.GONE);
             selectedImage.setVisibility(View.VISIBLE);
         }
     }
+
+    private String getRealPathFromUri(Uri uri) {
+        String[] projection = {MediaStore.Images.Media.DATA};
+        Cursor cursor = getContentResolver().query(uri, projection, null, null, null);
+        if (cursor != null) {
+            int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+            cursor.moveToFirst();
+            String s = cursor.getString(column_index);
+            cursor.close();
+            return s;
+        }
+        return null;
+    }
+
 }

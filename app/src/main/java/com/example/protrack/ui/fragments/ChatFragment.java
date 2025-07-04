@@ -12,10 +12,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.protrack.R;
+import com.example.protrack.data.ApiClient;
+import com.example.protrack.data.Message;
+import com.example.protrack.data.SharedPrefsManager;
 import com.example.protrack.model.ChatSummary;
 import com.example.protrack.model.Task;
+import com.example.protrack.model.response.MessagePreviewResponse;
 import com.example.protrack.ui.activities.ChatActivity;
 import com.example.protrack.ui.activities.TaskDetailActivity;
 import com.example.protrack.ui.activities.TaskListActivity;
@@ -25,6 +30,10 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -41,9 +50,9 @@ public class ChatFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    private RecyclerView chatlistRecyclerView;
-    private ChatListAdapter chatListAdapter;
-    private List<ChatSummary> chatSummaries;
+    private RecyclerView chatlistRecycleView;
+    private ChatListAdapter adapter;
+    private List<ChatSummary> chatSummaries = new ArrayList<>();
     public ChatFragment() {
         // Required empty public constructor
     }
@@ -75,45 +84,88 @@ public class ChatFragment extends Fragment {
         }
     }
 
+    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_chat, container, false);
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        // Khởi tạo RecyclerView và dữ liệu
-        chatlistRecyclerView = view.findViewById(R.id.chatlistRecycleView);
-        chatlistRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
-        // Tạo dữ liệu giả (dummy data) để hiển thị
-
-        chatSummaries = new ArrayList<>();
-        chatSummaries.add(new ChatSummary(R.drawable.ic_user, "John", "Hey, how are you?", "2m ago", 1));
-        chatSummaries.add(new ChatSummary(R.drawable.ic_user, "Jane", "Let's meet tomorrow!", "10m ago", 0));
-        chatSummaries.add(new ChatSummary(R.drawable.ic_user, "Team Project", "Update: deadline changed", "1h ago", 3));
-//        Ví dụ tạo dữ liệu với ảnh từ URL:
-//                chatSummaries = new ArrayList<>();
-//        chatSummaries.add(new ChatSummary(
-//                "https://example.com/avatar/john.jpg", // URL ảnh
-//                "John",
-//                "Hey, how are you?",
-//                "2m ago",
-//                1));
-
-        // Gán adapter và truyền sự kiện click
-        chatListAdapter = new ChatListAdapter(getContext(), chatSummaries, chatSummary -> {
-            // Xử lý khi click vào 1 item
-            Intent intent = new Intent(getActivity(), ChatActivity.class);
-            intent.putExtra("senderName", chatSummary.getSenderName());
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_chat, container, false);
+        chatlistRecycleView = view.findViewById(R.id.chatlistRecycleView);
+        chatlistRecycleView.setLayoutManager(new LinearLayoutManager(getContext()));
+        adapter = new ChatListAdapter(getContext(), chatSummaries, item -> {
+            Intent intent = new Intent(getContext(), ChatActivity.class);
+            intent.putExtra("userId", item.getUserId());
+            intent.putExtra("userName", item.getSenderName());
             startActivity(intent);
         });
-
-        chatlistRecyclerView.setAdapter(chatListAdapter);
+        chatlistRecycleView.setAdapter(adapter);
+        loadChatList();
+        return view;
     }
+
+    private void loadChatList() {
+        String token = SharedPrefsManager.getInstance(getContext()).getToken();
+        if (token == null) return;
+        Message api = ApiClient.getInstance().create(Message.class);
+        api.getMessagePreviews("Bearer " + token).enqueue(new Callback<List<MessagePreviewResponse>>() {
+            @Override
+            public void onResponse(Call<List<MessagePreviewResponse>> call, Response<List<MessagePreviewResponse>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    chatSummaries.clear();
+                    for (MessagePreviewResponse preview : response.body()) {
+                        ChatSummary summary = new ChatSummary(
+                                R.drawable.ic_user, // avatarResId, bạn có thể dùng mặc định hoặc để riêng nếu có url
+                                preview.getPartnerName(),  // userName: tên đối tác chat
+                                preview.getMessageContent(), // lastMessage
+                                preview.getSentAt(), // timeAgo (nếu muốn format, format ở đây)
+                                preview.getUnreadCount(),
+                                preview.getAvatarUrl(),
+                                preview.getUserId()
+                        );
+                        chatSummaries.add(summary);
+                    }
+                    adapter.notifyDataSetChanged();
+                }
+            }
+            @Override
+            public void onFailure(Call<List<MessagePreviewResponse>> call, Throwable t) {
+                Toast.makeText(getContext(), "Lỗi tải danh sách chat: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+
+//    @Override
+//    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+//        super.onViewCreated(view, savedInstanceState);
+//
+//        // Khởi tạo RecyclerView và dữ liệu
+//        chatlistRecyclerView = view.findViewById(R.id.chatlistRecycleView);
+//        chatlistRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+//
+//        // Tạo dữ liệu giả (dummy data) để hiển thị
+//
+//        chatSummaries = new ArrayList<>();
+//        chatSummaries.add(new ChatSummary(R.drawable.ic_user, "John", "Hey, how are you?", "2m ago", 1));
+//        chatSummaries.add(new ChatSummary(R.drawable.ic_user, "Jane", "Let's meet tomorrow!", "10m ago", 0));
+//        chatSummaries.add(new ChatSummary(R.drawable.ic_user, "Team Project", "Update: deadline changed", "1h ago", 3));
+////        Ví dụ tạo dữ liệu với ảnh từ URL:
+////                chatSummaries = new ArrayList<>();
+////        chatSummaries.add(new ChatSummary(
+////                "https://example.com/avatar/john.jpg", // URL ảnh
+////                "John",
+////                "Hey, how are you?",
+////                "2m ago",
+////                1));
+//
+//        // Gán adapter và truyền sự kiện click
+//        chatListAdapter = new ChatListAdapter(getContext(), chatSummaries, chatSummary -> {
+//            // Xử lý khi click vào 1 item
+//            Intent intent = new Intent(getActivity(), ChatActivity.class);
+//            intent.putExtra("senderName", chatSummary.getSenderName());
+//            startActivity(intent);
+//        });
+//
+//        chatlistRecyclerView.setAdapter(chatListAdapter);
+//    }
+
 
 }

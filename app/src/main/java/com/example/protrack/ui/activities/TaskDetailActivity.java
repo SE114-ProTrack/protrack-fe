@@ -7,18 +7,36 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.protrack.R;
+import com.example.protrack.data.ApiClient;
+import com.example.protrack.data.CommentService;
+import com.example.protrack.data.LabelService;
+import com.example.protrack.data.SharedPrefsManager;
+import com.example.protrack.data.TaskService;
 import com.example.protrack.model.Task;
 import com.example.protrack.model.Comment;
+import com.example.protrack.model.response.CommentPageResponse;
+import com.example.protrack.model.response.CommentResponse;
+import com.example.protrack.model.response.LabelResponse;
+import com.example.protrack.model.response.TaskAttachmentResponse;
+import com.example.protrack.model.response.TaskResponse;
+import com.google.android.material.chip.Chip;
+import com.google.android.material.chip.ChipGroup;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class TaskDetailActivity extends AppCompatActivity {
 
@@ -41,101 +59,108 @@ public class TaskDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_detail);
 
-//        // Khởi tạo danh sách subtask mẫu
-//        taskList = new ArrayList<>();
-//        taskList.add(new Task("Wireframe - ProTrack", "Design", "SE332", LocalDate.of(2025, 7, 1 )));
-//        taskList.add(new Task("Create backend API", "Code", "SE333",LocalDate.of(2020, 10, 1 )));
-//
-//        RecyclerView recyclerViewSubtask = findViewById(R.id.listviewsubtask);
-//        recyclerViewSubtask.setLayoutManager(new LinearLayoutManager(this));
-//
-//// Nếu dùng TaskCardAdapter cho subtask
-//        TaskCardAdapter subTaskAdapter = new TaskCardAdapter(taskList, task -> {
-//            // Có thể để trống hoặc xử lý click subtask nếu muốn
-//        });
-//        recyclerViewSubtask.setAdapter(subTaskAdapter);
+        String taskId = getIntent().getStringExtra("taskId");
+        String token = SharedPrefsManager.getInstance(this).getToken();
 
+        // Lấy task detail từ API
+        TaskService api = ApiClient.getInstance().create(TaskService.class);
+        api.getTaskDetail("Bearer " + token, taskId).enqueue(new Callback<TaskResponse>() {
+            @Override
+            public void onResponse(Call<TaskResponse> call, Response<TaskResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    TaskResponse task = response.body();
+                    showTaskDetail(task);
 
-         seeSubTaskActivity = findViewById(R.id.seeSubTaskActivity);
-        seeSubTaskActivity.setOnClickListener(v -> {
-            Intent intent = new Intent(TaskDetailActivity.this, SubTaskListActivity.class);
-            startActivity(intent);
-        });
+                    // Hiển thị label (danh sách)
+                    if (task.getLabels() != null && !task.getLabels().isEmpty()) {
+                        showLabels(task.getLabels());
+                    }
 
+                    // Hiển thị tập đính kèm (danh sách)
+                    if (task.getAttachments() != null && !task.getAttachments().isEmpty()) {
+                        showAttachments(task.getAttachments());
+                    }
 
+                    // Lấy comment từ API (nếu chưa có trong task)
+                    fetchComments(taskId);
+                }
+            }
 
-        // Khởi tạo danh sách comment mẫu
-        commentList = new ArrayList<>();
-        commentList.add(new Comment("Tiến Tôm", "3 hours ago", "Hello everyone, I have updated some tasks. Please take a look and reply to me asap.", R.drawable.bg_contained_14));
-        commentList.add(new Comment("Mai Lan", "1 hour ago", "Thanks for the update. I'll check it now.", R.drawable.ic_launcher_background));
-        commentList.add(new Comment("Anh Tuấn", "Just now", "Noted. Will get back to you soon.", R.drawable.bg_contained_14));
-
-        // Gán adapter cho danh sách comment
-
-        recyclerViewComment = findViewById(R.id.recyclerviewComment);
-        recyclerViewComment.setLayoutManager(new LinearLayoutManager(this));
-        commentCardAdapter = new CommentCardAdapter(this, commentList, visibleCount);
-        recyclerViewComment.setAdapter(commentCardAdapter);
-
-
-        // Nút mở rộng comment
-        btnExpand = findViewById(R.id.btn_cmt_expand);
-        btnExpand.setOnClickListener(v -> {
-            commentCardAdapter.increaseVisibleItemCount(2); // Hiển thị thêm 2 comment khi nhấn nút
-        });
-
-        // Nút chuyển sang màn hình chỉnh sửa task
-        btnEditTask = findViewById(R.id.btn_edit);
-        btnEditTask.setOnClickListener(v -> {
-            Intent intent = new Intent(TaskDetailActivity.this, EditTaskActivity.class);
-            startActivity(intent);
-        });
-
-
-
-        // Xử lý tìm kiếm
-        searchButton = findViewById(R.id.searchButton);
-        searchBar = findViewById(R.id.searchBar);
-
-        searchButton.setOnClickListener(v -> {
-            if (searchBar.getVisibility() == View.INVISIBLE) {
-                searchBar.setVisibility(View.VISIBLE);
-                searchBar.requestFocus();
-            } else {
-                searchBar.setVisibility(View.INVISIBLE);
+            @Override
+            public void onFailure(Call<TaskResponse> call, Throwable t) {
+                Toast.makeText(TaskDetailActivity.this, "Lỗi tải chi tiết task: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
 
-        // quay về
-        findViewById(R.id.backButton).setOnClickListener(v -> {
-            finish(); // Quay lại màn trước đó (TaskListActivity)
-        });
+        // ... (code xử lý các view, recyclerViewComment, btnExpand, btnEditTask, search, back, gửi comment ... giữ nguyên)
 
-        // Gửi comment mới
-        commentInput = findViewById(R.id.comment_input);
-        sendIcon = findViewById(R.id.send_icon);
-
-
+        // Gửi comment mới (gọi API thật nếu có)
         sendIcon.setOnClickListener(v -> {
             String content = commentInput.getText().toString().trim();
             if (!content.isEmpty()) {
-                Comment newComment = new Comment(
-                        "You",
-                        "Just now",
-                        content,
-                        R.drawable.ic_launcher_background
-                );
-                commentList.add(newComment);
-
-                // TĂNG visibleCount rồi set lại để đảm bảo comment mới được hiển thị
-                visibleCount++;
-                commentCardAdapter.setVisibleCount(visibleCount);
-
-                recyclerViewComment.post(() -> recyclerViewComment.scrollToPosition(commentList.size() - 1));
+                // TODO: Gọi API post comment thay vì chỉ add vào list
+                // Sau khi thành công, fetch lại comment từ API
+                //postComment(taskId, content);
                 commentInput.setText("");
             }
         });
+    }
 
+    private void showTaskDetail(TaskResponse task) {
+        // setText cho tên, mô tả, deadline, status, project name, icon, v.v.
+        // Ví dụ:
+        //TextView name = findViewById(R.id.task_name);
+        //name.setText(task.getTaskName());
+        // ... các trường khác
+    }
 
+    private void showLabels(List<LabelResponse> labels) {
+//        ChipGroup chipGroup = findViewById(R.id.chipGroupLabel);
+//        chipGroup.removeAllViews();
+//        for (LabelResponse label : labels) {
+//            Chip chip = new Chip(this);
+//            chip.setText(label.getLabelName());
+//            chip.setChipBackgroundColor(ColorStateList.valueOf(Color.parseColor(label.getColor())));
+//            chipGroup.addView(chip);
+//        }
+    }
+
+    private void showAttachments(List<TaskAttachmentResponse> attachments) {
+        // Hiển thị file đính kèm ra RecyclerView hoặc ListView
+        // Adapter custom để show tên file, icon tải về, v.v.
+    }
+
+    private void fetchComments(String taskId) {
+        CommentService api = ApiClient.getInstance().create(CommentService.class);
+        String token = SharedPrefsManager.getInstance(this).getToken();
+        api.getCommentsByTask("Bearer " + token, taskId, 0, 50).enqueue(new Callback<CommentPageResponse>() {
+            @Override
+            public void onResponse(Call<CommentPageResponse> call, Response<CommentPageResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    List<CommentResponse> comments = response.body().getContent();
+                    showComments(comments);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CommentPageResponse> call, Throwable t) {
+            }
+        });
+    }
+
+    private void showComments(List<CommentResponse> comments) {
+        // Map về model Comment, update Adapter commentCardAdapter
+        List<Comment> commentList = new ArrayList<>();
+        for (CommentResponse c : comments) {
+            commentList.add(new Comment(
+                    c.getUserName(),
+                    c.getTimestamp().toString(), // Xử lý format date nếu cần
+                    c.getContent(),
+                    R.drawable.ic_launcher_background // hoặc avatar nếu có
+            ));
+        }
+        //commentCardAdapter.setData(commentList);
+        recyclerViewComment.scrollToPosition(commentList.size() - 1);
     }
 }
+

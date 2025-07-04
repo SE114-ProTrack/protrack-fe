@@ -79,8 +79,8 @@ public class LoginActivity extends AppCompatActivity {
 
                     // Lưu token vào SharedPreferences
                     SharedPrefsManager prefs = SharedPrefsManager.getInstance(LoginActivity.this);
-
                     prefs.saveToken(auth.getToken());
+                    prefs.saveUserId(auth.getUserId());
 
                     // Chuyển sang MainActivity
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
